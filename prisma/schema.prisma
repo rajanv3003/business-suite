@@ -1,0 +1,130 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AssetStatus {
+  DRAFT
+  APPROVED
+  ARCHIVED
+}
+
+enum Role {
+  USER
+  TEAM_MEMBER
+  ADMIN
+  SUPER_ADMIN
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String?
+  role          Role           @default(USER)
+  workspaces    Workspace[]
+  subscriptions Subscription[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model Workspace {
+  id               String            @id @default(cuid())
+  userId           String
+  user             User              @relation(fields: [userId], references: [id])
+  name             String
+  businessProfile  BusinessProfile?
+  generatedAssets  GeneratedAsset[]
+  agentRuns        AgentRun[]
+  knowledgeDocs    KnowledgeDocument[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+model BusinessProfile {
+  id               String    @id @default(cuid())
+  workspaceId      String    @unique
+  workspace        Workspace @relation(fields: [workspaceId], references: [id])
+  practitionerType String[]
+  businessName     String?
+  experienceYears  Int?
+  certifications   String[]
+  methodologies    String[]
+  languages        String[]
+  markets          String[]
+  currentRevenue   Int?
+  targetRevenue    Int?
+  currentOfferPrice Int?
+  leadSources      String[]
+  profileJson      Json
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model GeneratedAsset {
+  id          String      @id @default(cuid())
+  workspaceId String
+  workspace   Workspace   @relation(fields: [workspaceId], references: [id])
+  area        String
+  title       String
+  status      AssetStatus @default(DRAFT)
+  version     Int         @default(1)
+  qualityJson Json
+  content     String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model AgentRun {
+  id            String    @id @default(cuid())
+  workspaceId   String
+  workspace     Workspace @relation(fields: [workspaceId], references: [id])
+  agentName     String
+  promptVersion String
+  inputJson     Json
+  outputJson    Json?
+  status        String
+  costUsd       Decimal?  @db.Decimal(10, 4)
+  tokensIn      Int?
+  tokensOut     Int?
+  error         String?
+  createdAt     DateTime  @default(now())
+}
+
+model KnowledgeDocument {
+  id          String           @id @default(cuid())
+  workspaceId String?
+  workspace   Workspace?       @relation(fields: [workspaceId], references: [id])
+  title       String
+  category    String
+  version     String
+  isGlobal    Boolean          @default(false)
+  enabled     Boolean          @default(true)
+  chunks      KnowledgeChunk[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model KnowledgeChunk {
+  id          String            @id @default(cuid())
+  documentId  String
+  document    KnowledgeDocument @relation(fields: [documentId], references: [id])
+  content     String
+  metadata    Json
+  embedding   Unsupported("vector")?
+  createdAt   DateTime          @default(now())
+}
+
+model Subscription {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  plan      String
+  status    String
+  provider  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gargi AI Business Sutra
 
-## Getting Started
+Hindi-first AI business operating system for astrologers, numerologists, Vastu consultants and occult professionals. The app focuses on the core path:
 
-First, run the development server:
+Business Kundli -> Niche Finder -> Customer Persona -> Premium Offer -> Panchang Content Calendar -> Viral Script Studio.
+
+## What Works
+
+- Premium Hindi-first dashboard with daily cosmic card and next action.
+- Guided परिचय मंडल onboarding.
+- Server-side Gemini/OpenAI generation with deterministic fallback.
+- Editable generated assets with draft and approve workflow.
+- Demo profile for Meera Sharma, a Vastu consultant.
+- Core module routes for Business Kundli, Niche, Persona, Offer, Calendar, Script, Tool Advisor, Build Prompt and Ask Gargi AI.
+- Documentation for architecture, AI agents, Panchang provider, admin, deployment and privacy.
+
+## Local Setup
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Use `.env.local` for real keys. Keep secrets server-side only.
 
-## Learn More
+```bash
+GEMINI_API_KEY=""
+GEMINI_MODEL="gemini-2.5-flash"
+OPENAI_API_KEY=""
+CHAT_MODEL="gpt-4.1-mini"
+```
 
-To learn more about Next.js, take a look at the following resources:
+If a live provider fails, `/api/generate` returns a local fallback output and shows the fallback reason.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Important Files
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `src/app/page.tsx` - Hindi dashboard.
+- `src/components/Sidebar.tsx` - desktop and mobile navigation.
+- `src/components/AgentWorkspace.tsx` - shared generation workspace.
+- `src/lib/profile.ts` - demo profile, module progress and asset model.
+- `src/lib/ai-provider.ts` - server-side provider abstraction.
+- `src/lib/agent-prompts.ts` - Gargi agent instructions and guardrails.
+- `src/lib/agent-generators.ts` - fallback outputs.
 
-## Deploy on Vercel
+## Known Limitations
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Authentication, Supabase/PostgreSQL persistence, RLS and payments are documented but not wired yet.
+- Panchang uses demo/fallback content until a verified provider or admin-uploaded calendar data is configured.
+- Admin surfaces still need database-backed roles.
+- PDF/DOCX/CSV exports are planned next.

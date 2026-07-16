@@ -1,157 +1,133 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useProfile } from "@/context/ProfileContext";
-import { Rocket, ArrowRight, Sparkles } from "lucide-react";
+import { BusinessProfile } from "@/lib/profile";
+import { ArrowLeft, ArrowRight, Check, Sparkles } from "lucide-react";
+import Link from "next/link";
 
-export default function Onboarding() {
+const questions = [
+  { path: "practitioner.name", label: "आपका नाम क्या है?", placeholder: "Meera Sharma" },
+  { path: "practitioner.businessName", label: "आपका Business या Brand Name क्या है?", placeholder: "Meera Vastu Guidance" },
+  { path: "practitioner.categories", label: "आपकी मुख्य Expertise क्या है?", placeholder: "Vastu consultant, numerologist, tarot reader..." },
+  { path: "practitioner.experienceYears", label: "आपको इस क्षेत्र में कितने वर्षों का अनुभव है?", placeholder: "8" },
+  { path: "business.currentRevenue", label: "आपकी औसत monthly income कितनी है? Optional और private.", placeholder: "180000" },
+  { path: "business.targetRevenue", label: "आप आगे कितना revenue generate करना चाहते हैं?", placeholder: "700000" },
+  { path: "business.currentPrice", label: "आपकी current consultation fee कितनी है?", placeholder: "7500" },
+  { path: "business.leadSources", label: "Leads अभी कहाँ से आते हैं?", placeholder: "Referrals, Instagram, WhatsApp..." },
+  { path: "expertise.problemsSolved", label: "Clients आपके पास सबसे अधिक किस problem के लिए आते हैं?", placeholder: "Clinic layout, renovation, business name..." },
+  { path: "expertise.uniqueProcess", label: "आपका unique framework, method या process क्या है?", placeholder: "Floor-plan review plus priority correction matrix..." },
+  { path: "audience.desiredAudience", label: "आप किस प्रकार के premium clients के साथ काम करना चाहते हैं?", placeholder: "Clinic owners, premium homeowners..." },
+  { path: "audience.objections", label: "Prospects कौन-सी objections raise करते हैं?", placeholder: "Demolition लगेगा? Online enough है? Price high है?" },
+  { path: "proof.testimonials", label: "आपके पास कौन-सा proof है?", placeholder: "Consent testimonials, screenshots, case studies..." },
+  { path: "preferences.businessModels", label: "आप कौन-सा business model बनाना चाहते हैं?", placeholder: "Premium consultation, group program, course, membership..." },
+];
+
+function getValue(source: Record<string, unknown>, path: string) {
+  return path.split(".").reduce<unknown>((value, key) => (value as Record<string, unknown>)?.[key], source) || "";
+}
+
+function setValue<T extends Record<string, unknown>>(source: T, path: string, value: string): T {
+  const [group, key] = path.split(".");
+  const currentGroup = source[group] as Record<string, unknown>;
+  return {
+    ...source,
+    [group]: {
+      ...currentGroup,
+      [key]: path.endsWith("categories") || path.endsWith("businessModels")
+        ? value.split(",").map((item) => item.trim()).filter(Boolean)
+        : value,
+    },
+  };
+}
+
+export default function OnboardingPage() {
   const router = useRouter();
   const { profile, update } = useProfile();
+  const [step, setStep] = useState(0);
+  const question = questions[step];
+  const initial = useMemo(() => {
+    const value = getValue(profile as unknown as Record<string, unknown>, question.path);
+    return Array.isArray(value) ? value.join(", ") : String(value);
+  }, [profile, question.path]);
+  const [answer, setAnswer] = useState(initial);
 
-  const [name, setName] = useState(profile.coach.name || "");
-  const [whoHelp, setWhoHelp] = useState(profile.onboarding.who_they_help || "");
-  const [theChange, setTheChange] = useState(profile.onboarding.the_change || "");
-  const [whatCall, setWhatCall] = useState(profile.onboarding.what_they_call_it || "");
-  const [signature, setSignature] = useState(profile.onboarding.signature_phrase || "");
-
-  const allFilled = name.trim() && whoHelp.trim() && theChange.trim() && whatCall.trim();
-
-  const handleSave = () => {
+  const next = () => {
+    const patched = setValue(profile as unknown as Record<string, unknown>, question.path, answer) as unknown as BusinessProfile;
     update({
-      coach: { ...profile.coach, name: name.trim() },
-      onboarding: {
-        who_they_help: whoHelp.trim(),
-        the_change: theChange.trim(),
-        what_they_call_it: whatCall.trim(),
-        signature_phrase: signature.trim(),
-        completed: true,
-      },
+      ...patched,
+      progress: { ...patched.progress, diagnosis: Math.max(30, Math.round(((step + 1) / questions.length) * 70)) },
     });
-    router.push("/icp-builder");
+
+    if (step === questions.length - 1) {
+      update({ progress: { ...patched.progress, diagnosis: 70 } });
+      router.push("/business-kundli");
+      return;
+    }
+
+    const nextStep = step + 1;
+    setStep(nextStep);
+    const nextValue = getValue(patched as unknown as Record<string, unknown>, questions[nextStep].path);
+    setAnswer(Array.isArray(nextValue) ? nextValue.join(", ") : String(nextValue || ""));
   };
 
   return (
-    <div className="min-h-screen p-8 relative z-10">
-      <div className="max-w-2xl mx-auto mt-8">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-white mx-auto mb-5"
-            style={{ background: "linear-gradient(135deg, #3b82f6, #8b5cf6)" }}>
-            <Rocket size={28} />
-          </div>
-          <h1 className="text-3xl font-bold text-text-primary mb-2">
-            தொடங்குவோம்!
-          </h1>
-          <p className="text-text-secondary text-sm">
-            சில சின்ன கேள்விகள் மட்டும். மீதி எல்லாம் <span className="text-accent-gold font-medium">ஞானி</span> build செய்யும்.
-          </p>
-          <p className="text-[10px] text-text-secondary/50 mt-1 uppercase tracking-wider">
-            Powered by Sasi Rekha Methodology
-          </p>
-        </div>
-
-        {/* Questions */}
-        <div className="space-y-6 animate-fade-in-up">
-          {/* Name */}
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              உங்கள் பெயர் என்ன?
-            </label>
-            <input
-              type="text"
-              placeholder='உதா: "பிரியா", "ராஜன்", "நேஹா"'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-
-          {/* Who they help */}
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              ஒரு வரியில் — நீங்கள் யாருக்கு உதவுகிறீர்கள்?
-            </label>
-            <input
-              type="text"
-              placeholder='உதா: "40 வயது working professionals — stuck-ஆ feel ஆகுறவங்க"'
-              value={whoHelp}
-              onChange={(e) => setWhoHelp(e.target.value)}
-            />
-            <p className="text-[10px] text-text-secondary/50 mt-1">அதிகம் யோசிக்காதீர்கள். ஒரு வரி போதும்.</p>
-          </div>
-
-          {/* The change */}
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              ஒரு வரியில் — நீங்கள் என்ன மாற்றம் செய்ய உதவுகிறீர்கள்?
-            </label>
-            <input
-              type="text"
-              placeholder='உதா: "stuck-ஆவும் invisible-ஆவும் feel ஆகுறது → confident-ஆவும் clear-ஆவும் ஆவது"'
-              value={theChange}
-              onChange={(e) => setTheChange(e.target.value)}
-            />
-            <p className="text-[10px] text-text-secondary/50 mt-1">எங்கிருந்து → எங்கு. அவ்வளவுதான்.</p>
-          </div>
-
-          {/* What they call it */}
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              உங்கள் வேலையை என்னவென்று சொல்வீர்கள்?
-            </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {["Life Coach", "Career Coach", "Confidence Coach", "Executive Coach", "Mindset Coach", "Relationship Coach", "Health Coach", "Business Coach"].map((opt) => (
-                <button
-                  key={opt}
-                  onClick={() => setWhatCall(opt)}
-                  className={`p-2.5 rounded-xl border text-sm font-medium transition-all ${
-                    whatCall === opt
-                      ? "border-accent-gold bg-accent-gold/10 text-accent-gold"
-                      : "border-border-default bg-bg-secondary text-text-secondary hover:border-text-secondary"
-                  }`}
-                >
-                  {opt}
-                </button>
-              ))}
+    <div className="relative z-10 min-h-screen p-6 lg:p-8">
+      <div className="mx-auto max-w-3xl">
+        <Link href="/" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-accent-gold">
+          <ArrowLeft size={16} />
+          Dashboard पर वापस
+        </Link>
+        <div className="surface rounded-xl p-6 lg:p-8">
+          <div className="mb-8 flex items-center justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.2em] text-accent-gold">परिचय मंडल</p>
+              <h1 className="mt-2 text-3xl font-black text-text-primary">आपकी Business Kundli तैयार हो रही है</h1>
+              <p className="mt-2 text-sm leading-6 text-text-secondary">
+                यही profile Niche, Persona, Offer, Calendar और Gargi AI Guide का source of truth बनेगी।
+              </p>
             </div>
-            <input
-              type="text"
-              placeholder="அல்லது உங்கள் சொந்த வார்த்தையில் type செய்யுங்கள்..."
-              value={["Life Coach", "Career Coach", "Confidence Coach", "Executive Coach", "Mindset Coach", "Relationship Coach", "Health Coach", "Business Coach"].includes(whatCall) ? "" : whatCall}
-              onChange={(e) => setWhatCall(e.target.value)}
-              className="mt-2"
-            />
+            <div className="grid h-14 w-14 place-items-center rounded-xl bg-accent-gold/10 text-accent-gold">
+              <Sparkles size={24} />
+            </div>
           </div>
 
-          {/* Signature phrase (optional) */}
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              ஒரு client சொன்ன ஒரு வாக்கியம் — உங்கள் மனதில் நிற்பது?
-              <span className="text-text-secondary/50 font-normal"> (optional)</span>
-            </label>
+          <div className="mb-6 flex gap-1">
+            {questions.map((item, index) => (
+              <div key={item.path} className={`h-1.5 flex-1 rounded-full ${index <= step ? "bg-gold-gradient" : "bg-white/8"}`} />
+            ))}
+          </div>
+
+          <label className="block">
+            <span className="text-xl font-bold text-text-primary">{question.label}</span>
             <textarea
-              rows={2}
-              placeholder='"உங்கள் sessions-க்கு பிறகு, நான் என்னை apologize பண்றதை நிறுத்தினேன்." — client நிஜமா சொன்ன ஏதாவது.'
-              value={signature}
-              onChange={(e) => setSignature(e.target.value)}
+              className="input-field mt-4 min-h-36 text-base"
+              value={answer}
+              placeholder={question.placeholder}
+              onChange={(event) => setAnswer(event.target.value)}
+              autoFocus
             />
+          </label>
+
+          <div className="mt-6 flex items-center justify-between">
+            <button
+              className="secondary-button px-4 py-2.5 text-sm disabled:opacity-40"
+              disabled={step === 0}
+              onClick={() => {
+                const previous = step - 1;
+                setStep(previous);
+                const value = getValue(profile as unknown as Record<string, unknown>, questions[previous].path);
+                setAnswer(Array.isArray(value) ? value.join(", ") : String(value || ""));
+              }}
+            >
+              पिछला
+            </button>
+            <button onClick={next} disabled={!answer.trim()} className="primary-button inline-flex items-center gap-2 px-5 py-3">
+              {step === questions.length - 1 ? <Check size={18} /> : <ArrowRight size={18} />}
+              {step === questions.length - 1 ? "Business Kundli बनाएं" : "अगला प्रश्न"}
+            </button>
           </div>
-
-          {/* Submit */}
-          <button
-            onClick={handleSave}
-            disabled={!allFilled}
-            className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-base font-semibold text-white transition-all hover:scale-[1.02] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
-            style={{ background: allFilled ? "linear-gradient(135deg, #d4a853, #f0c75e)" : "#333" }}
-          >
-            <Sparkles size={18} />
-            Save செய்து ஞானி-ஐ தொடங்கு
-            <ArrowRight size={18} />
-          </button>
-
-          <p className="text-center text-[10px] text-text-secondary/40">
-            இது விதை. மீதி எல்லாம் ஞானி இந்த பதில்களில் இருந்து உருவாக்கும்.
-          </p>
         </div>
       </div>
     </div>

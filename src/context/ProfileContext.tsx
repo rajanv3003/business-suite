@@ -23,6 +23,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
 
   // Load profile from localStorage after mount (avoids hydration mismatch)
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setProfile(loadProfile());
     setIsLoaded(true);
   }, []);
@@ -46,7 +47,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   ) => {
     setProfile((prev) => ({
       ...prev,
-      [key]: { ...prev[key], ...patch },
+      [key]: { ...(prev[key] as object), ...(patch as object) } as BusinessProfile[K],
     }));
   }, []);
 
