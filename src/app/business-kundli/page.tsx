@@ -6,11 +6,11 @@ export default function BusinessKundliPage() {
   return (
     <AgentWorkspace
       area="diagnosis"
-      title="Business Kundli Reveal"
-      subtitle="Practitioner profile, proof, audience और revenue goal को मिलाकर strongest business direction निकाले।"
+      title="Soul Map"
+      subtitle="Clarify the practitioner’s spiritual identity, guidance style and safest next quest move."
       questions={[
-        { id: "goal", label: "अगले 90 दिनों का मुख्य goal क्या है?", placeholder: "Premium clinic Vastu package launch करना..." },
-        { id: "proof", label: "कौन-सा proof safely use कर सकते हैं?", placeholder: "Consent वाले testimonials, anonymized results..." },
+        { id: "goal", label: "What kind of guidance do you most naturally provide?", placeholder: "Career clarity, Vastu harmony, numerology alignment, Tarot reflection..." },
+        { id: "proof", label: "What real proof or experience can be safely mentioned?", placeholder: "Years of practice, consented testimonials, anonymized client reflections..." },
       ]}
     />
   );

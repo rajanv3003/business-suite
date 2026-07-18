@@ -6,11 +6,11 @@ export default function OfferAlchemistPage() {
   return (
     <AgentWorkspace
       area="offer"
-      title="Premium Offer Alchemist"
-      subtitle="Single consultation को tangible high-ticket package में बदलें: diagnosis, report, roadmap, checklist और follow-up."
+      title="Offering Craft"
+      subtitle="Shape a clear spiritual offering with a graceful ritual flow, deliverables and boundaries."
       questions={[
-        { id: "deliverables", label: "Offer में कौन-से tangible deliverables देने हैं?", placeholder: "Floor-plan report, priority matrix, tracker..." },
-        { id: "capacity", label: "हर week delivery के लिए कितना time है?", placeholder: "10 hours, 4 clients/month..." },
+        { id: "deliverables", label: "What should the client receive after the session?", placeholder: "Reading notes, reflection prompts, Vastu checklist, follow-up summary..." },
+        { id: "capacity", label: "How much time can you give each client?", placeholder: "60 minutes, 90 minutes, one follow-up, written summary..." },
       ]}
     />
   );

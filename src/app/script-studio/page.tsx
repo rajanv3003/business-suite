@@ -6,11 +6,13 @@ export default function ScriptStudioPage() {
   return (
     <AgentWorkspace
       area="script"
-      title="Viral Script Studio"
-      subtitle="Calendar idea से word-by-word Reel, Short, carousel या WhatsApp script generate करें।"
+      title="Content Spellbook"
+      subtitle="Create hook-led Reels, Shorts, carousels or WhatsApp scripts with Panchang context, solution and CTA."
       questions={[
-        { id: "topic", label: "आज का topic क्या है?", placeholder: "Clinic renovation से पहले 3 Vastu checks..." },
-        { id: "tone", label: "Tone कैसा चाहिए?", placeholder: "Simple, authoritative, emotional, story-based..." },
+        { id: "topic", label: "What is today’s topic?", placeholder: "Before you ask for a prediction, ask this..." },
+        { id: "tone", label: "What tone should it have?", placeholder: "Calm, reflective, elegant, practical, beginner-friendly..." },
+        { id: "hook_style", label: "Which hook style should Gargi use?", placeholder: "Mistake, myth-bust, before-you-decide, 3-step method, comparison..." },
+        { id: "cta", label: "What should viewers do next?", placeholder: "Comment CLARITY, DM NAME, book reading, save this, share with family..." },
       ]}
     />
   );

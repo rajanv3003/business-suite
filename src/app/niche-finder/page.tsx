@@ -6,11 +6,11 @@ export default function NicheFinderPage() {
   return (
     <AgentWorkspace
       area="niche"
-      title="High-Ticket Niche Finder"
-      subtitle="Expertise, proof, buying power और ethical suitability के आधार पर premium niches score करें।"
+      title="Path Finder"
+      subtitle="Choose a focused occult practice path without making the brand sound pushy or generic."
       questions={[
-        { id: "preferred", label: "किस audience के साथ काम करना पसंद है?", placeholder: "Clinic owners, premium homeowners, office owners..." },
-        { id: "excluded", label: "किस तरह के clients avoid करने हैं?", placeholder: "Fear-based urgent remedy seekers..." },
+        { id: "preferred", label: "Who do you feel called to guide?", placeholder: "Professionals, families, founders, couples, students, homeowners..." },
+        { id: "excluded", label: "What kind of guidance do you not want to offer?", placeholder: "Fear-based predictions, health claims, legal outcomes..." },
       ]}
     />
   );

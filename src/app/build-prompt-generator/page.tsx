@@ -6,11 +6,11 @@ export default function BuildPromptGeneratorPage() {
   return (
     <AgentWorkspace
       area="prompt"
-      title="AI Build Prompt Generator"
-      subtitle="Codex, Lovable, Replit, Bolt या Cursor के लिए detailed build prompt बनाएं।"
+      title="Builder Scroll"
+      subtitle="Create clean prompts for Codex, Lovable, Replit, Bolt or Cursor."
       questions={[
-        { id: "product", label: "कौन-सा tool या mini-SaaS build करना है?", placeholder: "Clinic Vastu lead magnet landing page..." },
-        { id: "features", label: "Launch version में कौन-से features जरूरी हैं?", placeholder: "Login, lead form, admin CSV export, WhatsApp copy..." },
+        { id: "product", label: "What do you want to build?", placeholder: "A light luxury reading booking page..." },
+        { id: "features", label: "What must be in the first version?", placeholder: "Lead form, disclaimer, booking CTA, admin export..." },
       ]}
     />
   );

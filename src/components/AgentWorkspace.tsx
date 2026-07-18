@@ -5,6 +5,7 @@ import { useProfile } from "@/context/ProfileContext";
 import { createAsset, WorkspaceArea } from "@/lib/profile";
 import { ArrowLeft, BadgeCheck, Check, Copy, FileCheck2, Loader2, RadioTower, RefreshCw, Save, ShieldCheck, Sparkles } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface AgentWorkspaceProps {
   area: WorkspaceArea;
@@ -13,8 +14,33 @@ interface AgentWorkspaceProps {
   questions: { id: string; label: string; placeholder: string }[];
 }
 
+function StructuredOutput({ content }: { content: string }) {
+  const sections = content
+    .split(/\n##\s+/)
+    .map((section, index) => (index === 0 ? section.replace(/^#\s*/, "") : section))
+    .map((section) => {
+      const [title, ...rest] = section.split("\n");
+      return { title: title.trim(), body: rest.join("\n").trim() };
+    })
+    .filter((section) => section.title || section.body);
+
+  return (
+    <div className="grid gap-3">
+      {sections.map((section, index) => (
+        <article key={`${section.title}-${index}`} className="answer-card">
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-text-secondary">
+            {index === 0 ? "Gargi Reading" : section.title}
+          </p>
+          {index === 0 ? <h3 className="mt-1 text-xl font-black text-text-primary">{section.title}</h3> : null}
+          <div className="mt-2 whitespace-pre-wrap text-sm leading-7 text-text-secondary">{section.body}</div>
+        </article>
+      ))}
+    </div>
+  );
+}
+
 export function AgentWorkspace({ area, title, subtitle, questions }: AgentWorkspaceProps) {
-  const { profile, update } = useProfile();
+  const { profile, update, updateNested } = useProfile();
   const existing = useMemo(() => profile.assets.find((asset) => asset.area === area), [profile.assets, area]);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [output, setOutput] = useState(existing?.content || "");
@@ -65,45 +91,64 @@ export function AgentWorkspace({ area, title, subtitle, questions }: AgentWorksp
       <div className="mx-auto max-w-6xl">
         <Link href="/" className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-accent-gold">
           <ArrowLeft size={16} />
-          Dashboard पर वापस
+          Back to Quest Home
         </Link>
 
         <div className="agent-header mb-6 rounded-xl p-5 lg:p-6">
-          <div>
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+            <div className="flex gap-4">
+              <Image src="/brand/gargi-ai-universe.jpg" alt="Gargi AI Universe" width={64} height={64} className="h-16 w-16 rounded-full border border-accent-gold/30 object-cover shadow-lg" />
+              <div>
             <div className="mb-3 flex flex-wrap gap-2">
               <span className="status-pill status-pill-live">
                 <RadioTower size={13} />
-                Live specialist agent
+                Live guide
               </span>
               <span className="status-pill">
                 <ShieldCheck size={13} />
-                Proof-safe output
+                Responsible output
               </span>
             </div>
             <h1 className="text-3xl font-black tracking-tight text-text-primary lg:text-4xl">{title}</h1>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-text-secondary">{subtitle}</p>
+              </div>
+            </div>
+            <div className="mt-5 inline-flex rounded-full border border-border-default bg-white/80 p-1 shadow-sm">
+              <button
+                onClick={() => updateNested("preferences", { language: "english" })}
+                className={`rounded-full px-4 py-2 text-sm font-bold ${profile.preferences.language === "english" ? "bg-text-primary text-white" : "text-text-secondary"}`}
+              >
+                English
+              </button>
+              <button
+                onClick={() => updateNested("preferences", { language: "hindi" })}
+                className={`rounded-full px-4 py-2 text-sm font-bold ${profile.preferences.language === "hindi" ? "bg-text-primary text-white" : "text-text-secondary"}`}
+              >
+              Hindi
+              </button>
+            </div>
           </div>
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
             <div className="metric-card rounded-lg p-4">
-              <p className="text-xs text-text-secondary">Asset progress</p>
+              <p className="text-xs text-text-secondary">Quest progress</p>
               <p className="mt-1 text-2xl font-black text-accent-gold">{profile.progress[area]}%</p>
             </div>
             <div className="metric-card rounded-lg p-4">
-              <p className="text-xs text-text-secondary">Provider mode</p>
+              <p className="text-xs text-text-secondary">Output mode</p>
               <p className="mt-1 text-sm font-bold text-text-primary">{runMeta ? runMeta.provider : "Ready"}</p>
             </div>
             <div className="metric-card rounded-lg p-4">
-              <p className="text-xs text-text-secondary">Approved state</p>
+              <p className="text-xs text-text-secondary">Saved state</p>
               <p className="mt-1 text-sm font-bold text-text-primary">{existing?.status === "approved" ? "Approved" : "Draft"}</p>
             </div>
           </div>
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="grid gap-4 lg:grid-cols-[0.78fr_1.22fr]">
           <section className="surface premium-panel rounded-xl p-5">
-            <h2 className="text-lg font-bold text-text-primary">Guided Inputs</h2>
+            <h2 className="text-lg font-bold text-text-primary">Simple Inputs</h2>
             <p className="mt-1 text-sm leading-6 text-text-secondary">
-              Agent पहले saved Business Kundli पढ़ता है। ये answers सिर्फ इस run को sharpen करते हैं।
+              Add only what matters. The guide uses your saved profile, preferred language and current quest step.
             </p>
             <div className="mt-5 space-y-4">
               {questions.map((question) => (
@@ -120,18 +165,19 @@ export function AgentWorkspace({ area, title, subtitle, questions }: AgentWorksp
             </div>
             <button onClick={run} disabled={phase === "generating"} className="primary-button mt-5 flex w-full items-center justify-center gap-2 px-5 py-3">
               {phase === "generating" ? <Loader2 className="animate-spin" size={18} /> : <Sparkles size={18} />}
-              {output ? "Regenerate करें" : "Asset Generate करें"}
+              {output ? "Regenerate" : "Create Output"}
             </button>
             <div className="mt-4 rounded-lg border border-accent-gold/15 bg-accent-gold/7 p-4">
               <p className="flex items-center gap-2 text-sm font-bold text-accent-gold">
                 <FileCheck2 size={16} />
-                Authority checks
+                Quality checks
               </p>
               <ul className="mt-2 space-y-2 text-xs leading-5 text-text-secondary">
-                <li>Specific audience और offer fit</li>
-                <li>Proof claims verification के लिए marked</li>
-                <li>No manipulative या fear-based claims</li>
-                <li>Clear अगला कदम included</li>
+                <li>Clear, natural English unless Hindi is selected</li>
+                <li>Astrology and occult context stays respectful</li>
+                <li>No manipulative or fear-based claims</li>
+                <li>Content outputs include hook, solution and CTA</li>
+                <li>Next move is practical and easy to follow</li>
               </ul>
             </div>
             {runMeta ? (
@@ -152,7 +198,7 @@ export function AgentWorkspace({ area, title, subtitle, questions }: AgentWorksp
 
           <section className="surface result-panel rounded-xl p-5">
             <div className="mb-4 flex items-center justify-between gap-3">
-              <h2 className="text-lg font-bold text-text-primary">Generated Result</h2>
+              <h2 className="text-lg font-bold text-text-primary">Gargi’s Reply</h2>
               {existing?.status === "approved" ? (
                 <span className="inline-flex items-center gap-1 rounded-full bg-accent-green/10 px-3 py-1 text-xs font-bold text-accent-green">
                   <BadgeCheck size={14} /> Approved
@@ -160,16 +206,32 @@ export function AgentWorkspace({ area, title, subtitle, questions }: AgentWorksp
               ) : null}
             </div>
             {phase === "generating" ? (
-              <div className="agent-loading grid min-h-[520px] place-items-center rounded-lg border border-white/8 bg-white/3">
+              <div className="agent-loading grid min-h-[520px] place-items-center rounded-lg border border-border-default bg-white/70">
                 <div className="text-center">
-                  <Loader2 className="mx-auto animate-spin text-accent-gold" size={30} />
-                  <p className="mt-4 text-sm font-semibold text-text-primary">Business Kundli analyse हो रही है</p>
-                  <p className="mt-1 text-xs text-text-secondary">Proof और ethical claims cross-check हो रहे हैं।</p>
+                  <Image src="/brand/gargi-ai-universe.jpg" alt="" width={64} height={64} className="mx-auto h-16 w-16 rounded-full border border-accent-gold/30 object-cover" />
+                  <p className="mt-4 text-sm font-semibold text-text-primary">Reading the profile and shaping the guidance</p>
+                  <p className="mt-1 inline-flex items-center gap-1 text-xs text-text-secondary">Gargi is typing <span className="typing-bubble !p-0 !shadow-none"><i /><i /><i /></span></p>
                 </div>
               </div>
             ) : output ? (
               <>
-                <textarea className="input-field min-h-[520px] font-mono text-sm leading-6" value={output} onChange={(event) => setOutput(event.target.value)} />
+                <div className="min-h-[520px] rounded-lg border border-border-default bg-white/72 p-4">
+                  <StructuredOutput content={output} />
+                </div>
+                <details className="mt-3 rounded-lg border border-border-default bg-white/70 p-3">
+                  <summary className="cursor-pointer text-sm font-bold text-text-primary">Edit raw text</summary>
+                  <textarea className="input-field mt-3 min-h-64 font-mono text-sm leading-6" value={output} onChange={(event) => setOutput(event.target.value)} />
+                </details>
+                <div className="mt-4 rounded-lg border border-accent-gold/20 bg-accent-gold/8 p-4">
+                  <p className="text-sm font-bold text-text-primary">What feedback should Gargi apply next?</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {["Make it deeper", "Make it simpler", "Make it more premium", "Add examples"].map((item) => (
+                      <button key={item} onClick={() => setAnswers((current) => ({ ...current, feedback: item }))} className="secondary-button px-3 py-2 text-xs">
+                        {item}
+                      </button>
+                    ))}
+                  </div>
+                </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <button onClick={() => saveDraft("draft")} className="secondary-button inline-flex items-center gap-2 px-4 py-2.5 text-sm">
                     <Save size={16} /> Draft save
@@ -196,8 +258,8 @@ export function AgentWorkspace({ area, title, subtitle, questions }: AgentWorksp
               <div className="grid min-h-[520px] place-items-center rounded-lg border border-dashed border-white/10 p-8 text-center">
                 <div>
                   <Sparkles className="mx-auto text-text-secondary" size={32} />
-                  <p className="mt-3 text-sm font-semibold text-text-primary">Output अभी ready नहीं है</p>
-                  <p className="mt-1 text-sm text-text-secondary">Guided questions भरकर asset generate करें।</p>
+                  <p className="mt-3 text-sm font-semibold text-text-primary">No output yet</p>
+                  <p className="mt-1 text-sm text-text-secondary">Answer the simple inputs and create your scroll.</p>
                 </div>
               </div>
             )}

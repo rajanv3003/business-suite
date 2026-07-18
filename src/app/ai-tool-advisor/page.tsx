@@ -6,11 +6,11 @@ export default function AiToolAdvisorPage() {
   return (
     <AgentWorkspace
       area="tools"
-      title="AI Tool Advisor"
-      subtitle="Non-technical practitioners के लिए landing page, WhatsApp, CRM, booking और content tools की practical stack recommendation."
+      title="Tool Oracle"
+      subtitle="Choose simple tools for forms, notes, content and follow-up without overwhelming the practitioner."
       questions={[
-        { id: "useCase", label: "आप क्या बनाना चाहते हैं?", placeholder: "Landing page, WhatsApp automation, CRM, client report..." },
-        { id: "budget", label: "Budget और technical comfort क्या है?", placeholder: "Low budget, no-code preferred, team नहीं है..." },
+        { id: "useCase", label: "What do you want to set up first?", placeholder: "Intake form, client notes, booking page, content calendar..." },
+        { id: "budget", label: "How technical do you want this to be?", placeholder: "No-code, simple tools only, low budget..." },
       ]}
     />
   );

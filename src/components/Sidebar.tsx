@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useProfile } from "@/context/ProfileContext";
 import { areas, completion } from "@/lib/profile";
@@ -35,11 +36,11 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const navItems = [
-  { href: "/", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/onboarding", label: "परिचय मंडल", icon: BrainCircuit },
-  { href: "/business-brain", label: "Saved Blueprint", icon: FileText },
+  { href: "/", label: "Quest Home", icon: LayoutDashboard },
+  { href: "/onboarding", label: "Profile Ritual", icon: BrainCircuit },
+  { href: "/business-brain", label: "Saved Scrolls", icon: FileText },
   ...areas.map((area) => ({ href: area.path, label: area.label, icon: iconMap[area.id], area: area.id })),
-  { href: "/admin", label: "Admin Mandal", icon: ShieldCheck },
+  { href: "/admin", label: "Admin", icon: ShieldCheck },
 ];
 
 export function Sidebar() {
@@ -52,12 +53,10 @@ export function Sidebar() {
     <aside className="app-sidebar fixed left-0 top-0 z-50 hidden h-screen w-72 flex-col border-r border-border-default bg-bg-secondary/92 backdrop-blur-xl lg:flex">
       <div className="border-b border-border-default p-5">
         <Link href="/" className="flex items-center gap-3">
-          <div className="brand-mark">
-            <span>ग</span>
-          </div>
+          <Image src="/brand/gargi-ai-universe.jpg" alt="Gargi AI Universe" width={48} height={48} className="h-12 w-12 rounded-full border border-accent-gold/30 object-cover shadow-lg" />
           <div>
             <h1 className="text-base font-bold tracking-tight text-text-primary">Gargi AI Business Sutra</h1>
-            <p className="text-[10px] uppercase tracking-[0.2em] text-accent-gold">Powered by Gargi A. Jaitley</p>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-accent-gold">Light Occult OS</p>
           </div>
         </Link>
       </div>
@@ -65,13 +64,13 @@ export function Sidebar() {
       <div className="border-b border-border-default px-5 py-4">
         <p className="text-xs uppercase tracking-[0.18em] text-text-secondary">Workspace</p>
         <p className="mt-1 truncate text-sm font-semibold text-text-primary">
-          {profile.practitioner.name || "Meera Sharma Demo"}
+          {profile.practitioner.name || "Meera Sharma"}
         </p>
         <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/6">
           <div className="h-full rounded-full bg-gold-gradient transition-all" style={{ width: `${total}%` }} />
         </div>
         <div className="mt-2 flex items-center justify-between text-[11px] text-text-secondary">
-          <span>Business Kundli readiness</span>
+          <span>Quest progress</span>
           <span className="font-semibold text-accent-gold">{total}%</span>
         </div>
       </div>
@@ -96,10 +95,14 @@ export function Sidebar() {
       </nav>
 
       <div className="border-t border-border-default p-4">
+        <div className="mb-3 grid grid-cols-2 gap-2">
+          <Image src="/brand/make-in-india.png" alt="Make in India" width={108} height={40} className="h-10 w-full rounded-lg border border-border-default bg-white object-contain p-1.5" />
+          <Image src="/brand/startup-india.png" alt="Startup India" width={108} height={40} className="h-10 w-full rounded-lg border border-border-default bg-white object-contain p-1.5" />
+        </div>
         <div className="rounded-lg border border-accent-gold/18 bg-accent-gold/8 p-3">
-          <p className="text-xs font-semibold text-accent-gold">Ethical guardrails active</p>
+          <p className="text-xs font-semibold text-accent-gold">Guidance guardrails</p>
           <p className="mt-1 text-[11px] leading-relaxed text-text-secondary">
-            कोई fabricated proof, fear-based selling, या guaranteed health, marriage, wealth और legal outcome claims नहीं.
+            Reflective guidance only. No fear-based claims, fake proof, or guaranteed outcomes.
           </p>
         </div>
       </div>

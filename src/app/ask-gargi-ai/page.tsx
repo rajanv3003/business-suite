@@ -7,10 +7,10 @@ export default function AskGargiAiPage() {
     <AgentWorkspace
       area="guide"
       title="Ask Gargi AI"
-      subtitle="Saved Business Kundli के context से contextual business, content और offer guidance लें।"
+      subtitle="Ask for clear guidance based on the saved Soul Map, practice path and language preference."
       questions={[
-        { id: "question", label: "Gargi AI से क्या पूछना है?", placeholder: "मेरा high-ticket client कौन हो सकता है? आज क्या post करूं?" },
-        { id: "constraint", label: "कोई constraint या preference?", placeholder: "Hindi में, practical रखें, no fear-based selling..." },
+        { id: "question", label: "What do you want guidance on?", placeholder: "What should I post today? How should I explain my reading style?" },
+        { id: "constraint", label: "Any preference?", placeholder: "Keep it English, elegant, practical, no fear-based wording..." },
       ]}
     />
   );

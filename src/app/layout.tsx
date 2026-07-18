@@ -23,7 +23,7 @@ const notoSerifDevanagari = Noto_Serif_Devanagari({
 
 export const metadata: Metadata = {
   title: "Gargi AI Business Sutra",
-  description: "Hindi-first AI business operating system for astrologers, numerologists, Vastu consultants and occult professionals.",
+  description: "Light luxury occult business operating system for astrologers, numerologists, Vastu consultants and spiritual practitioners.",
 };
 
 export default function RootLayout({
@@ -33,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="hi"
+      lang="en"
       className={`${inter.variable} ${notoSansDevanagari.variable} ${notoSerifDevanagari.variable} h-full antialiased`}
     >
       <body className="min-h-screen flex bg-bg-primary text-text-primary">

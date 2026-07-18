@@ -84,6 +84,7 @@ export interface BusinessProfile {
     businessModels: string[];
     brandVoice: string;
     complianceNotes: string;
+    language: "english" | "hindi";
   };
   progress: Record<WorkspaceArea, number>;
   assets: GeneratedAsset[];
@@ -96,15 +97,15 @@ const STORAGE_KEY = "astro-business-os-profile";
 const now = () => new Date().toISOString();
 
 export const areas: { id: WorkspaceArea; label: string; path: string }[] = [
-  { id: "diagnosis", label: "Business Kundli", path: "/business-kundli" },
-  { id: "niche", label: "Niche Finder", path: "/niche-finder" },
-  { id: "persona", label: "Customer Persona", path: "/customer-persona" },
-  { id: "offer", label: "Offer Alchemist", path: "/offer-alchemist" },
-  { id: "calendar", label: "Panchang Calendar", path: "/content-calendar" },
-  { id: "script", label: "Script Studio", path: "/script-studio" },
-  { id: "tools", label: "AI Tool Advisor", path: "/ai-tool-advisor" },
-  { id: "prompt", label: "Build Prompt", path: "/build-prompt-generator" },
-  { id: "guide", label: "Ask Gargi AI", path: "/ask-gargi-ai" },
+  { id: "diagnosis", label: "Soul Map", path: "/business-kundli" },
+  { id: "niche", label: "Path Finder", path: "/niche-finder" },
+  { id: "persona", label: "Client Avatar", path: "/customer-persona" },
+  { id: "offer", label: "Offering Craft", path: "/offer-alchemist" },
+  { id: "calendar", label: "Cosmic Calendar", path: "/content-calendar" },
+  { id: "script", label: "Content Spellbook", path: "/script-studio" },
+  { id: "tools", label: "Tool Oracle", path: "/ai-tool-advisor" },
+  { id: "prompt", label: "Builder Scroll", path: "/build-prompt-generator" },
+  { id: "guide", label: "Gargi Guide", path: "/ask-gargi-ai" },
 ];
 
 export function demoProfile(): BusinessProfile {
@@ -159,9 +160,10 @@ export function demoProfile(): BusinessProfile {
       media: "Not uploaded.",
     },
     preferences: {
-      businessModels: ["Premium consultation", "30-day implementation support", "Clinic Vastu audit"],
-      brandVoice: "Hindi-first, premium, practical, culturally authentic",
+      businessModels: ["Signature reading", "Guided consultation", "Monthly content ritual"],
+      brandVoice: "Elegant, mystical, clear, warm, premium, English-first",
       complianceNotes: "Avoid guaranteed wealth, relationship or supernatural claims. Mark proof requiring verification.",
+      language: "english",
     },
     progress: {
       diagnosis: 80,
@@ -240,8 +242,9 @@ export function emptyProfile(): BusinessProfile {
     },
     preferences: {
       businessModels: [],
-      brandVoice: "Modern, credible and practical",
+      brandVoice: "Elegant, mystical, clear, warm, premium",
       complianceNotes: "No guaranteed financial, health, relationship or supernatural claims.",
+      language: "english",
     },
     progress: {
       diagnosis: 0,

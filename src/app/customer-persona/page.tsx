@@ -6,11 +6,11 @@ export default function CustomerPersonaPage() {
   return (
     <AgentWorkspace
       area="persona"
-      title="Customer Persona"
-      subtitle="Age और city से आगे जाकर buyer की private worries, trust needs और purchase triggers समझें।"
+      title="Client Avatar"
+      subtitle="Understand the seeker’s inner questions, trust needs and preferred style of spiritual support."
       questions={[
-        { id: "trigger", label: "Client किस trigger पर consultation खरीदता है?", placeholder: "Renovation, clinic launch, business name change..." },
-        { id: "trust", label: "उन्हें advisor पर trust करने के लिए क्या चाहिए?", placeholder: "Clear report, proof, calm explanation, no demolition pressure..." },
+        { id: "trigger", label: "What brings this seeker to a session?", placeholder: "A repeated pattern, a life decision, space confusion, name change..." },
+        { id: "trust", label: "What helps them feel safe with a practitioner?", placeholder: "Calm language, clear boundaries, written notes, no fear..." },
       ]}
     />
   );
