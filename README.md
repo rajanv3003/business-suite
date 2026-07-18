@@ -1,4 +1,4 @@
-# Gargi AI Business Sutra
+# Gargi Sutra
 
 Hindi-first AI business operating system for astrologers, numerologists, Vastu consultants and occult professionals. The app focuses on the core path:
 

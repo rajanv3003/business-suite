@@ -155,7 +155,7 @@ export default function Dashboard() {
         <main className="surface premium-panel overflow-hidden rounded-xl">
           <header className="flex flex-wrap items-center justify-between gap-4 border-b border-border-default bg-white/70 p-5 lg:p-6">
             <div className="flex items-center gap-4">
-              <Image src="/brand/gargi-ai-universe.jpg" alt="Gargi AI Universe logo" width={64} height={64} className="h-16 w-16 rounded-full border border-accent-gold/30 object-cover shadow-lg" priority />
+              <Image src="/brand/gargi-ai-universe.jpg" alt="Gargi Sutra logo" width={64} height={64} className="h-16 w-16 rounded-full border border-accent-gold/30 object-cover shadow-lg" priority />
               <div>
                 <div className="flex flex-wrap gap-2">
                   <span className="status-pill status-pill-live"><Gem size={13} /> Official Gargi workspace</span>
@@ -280,9 +280,9 @@ export default function Dashboard() {
             <p className="text-xs uppercase tracking-[0.18em] text-text-secondary">{t.partners}</p>
             <div className="mt-4 grid gap-3">
               <div className="brand-highlight">
-                <Image src="/brand/gargi-ai-universe.jpg" alt="Gargi AI Universe" width={64} height={64} className="h-16 w-16 rounded-full object-cover" />
+                <Image src="/brand/gargi-ai-universe.jpg" alt="Gargi Sutra" width={64} height={64} className="h-16 w-16 rounded-full object-cover" />
                 <div>
-                  <p className="text-sm font-black text-text-primary">Gargi AI Universe</p>
+                  <p className="text-sm font-black text-text-primary">Gargi Sutra</p>
                   <p className="text-xs text-text-secondary">Primary company logo</p>
                 </div>
               </div>

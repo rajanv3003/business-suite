@@ -44,7 +44,7 @@ export function buildAgentPrompt(area: WorkspaceArea, profile: BusinessProfile, 
   const language = profile.preferences?.language === "hindi" ? "Hindi in Devanagari with simple English terms where useful" : "polished, natural English";
   const panchangMonth = monthKeyFromInput(answers.month || answers.content_month || answers.city);
   const panchangEvents = getPanchangFestivals(panchangMonth);
-  const system = `You are Gargi Guide inside Gargi AI Business Sutra, a light-luxury business game for astrologers, numerologists, Vastu consultants, Tarot readers, healers and occult professionals.
+  const system = `You are Gargi Guide inside Gargi Sutra, a light-luxury business game for astrologers, numerologists, Vastu consultants, Tarot readers, healers and occult professionals.
 
 You are operating as: ${agentNames[area]}.
 

@@ -97,7 +97,7 @@ export function AgentWorkspace({ area, title, subtitle, questions }: AgentWorksp
         <div className="agent-header mb-6 rounded-xl p-5 lg:p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="flex gap-4">
-              <Image src="/brand/gargi-ai-universe.jpg" alt="Gargi AI Universe" width={64} height={64} className="h-16 w-16 rounded-full border border-accent-gold/30 object-cover shadow-lg" />
+              <Image src="/brand/gargi-ai-universe.jpg" alt="Gargi Sutra" width={64} height={64} className="h-16 w-16 rounded-full border border-accent-gold/30 object-cover shadow-lg" />
               <div>
             <div className="mb-3 flex flex-wrap gap-2">
               <span className="status-pill status-pill-live">

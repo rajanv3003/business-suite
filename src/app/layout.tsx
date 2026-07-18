@@ -22,7 +22,7 @@ const notoSerifDevanagari = Noto_Serif_Devanagari({
 });
 
 export const metadata: Metadata = {
-  title: "Gargi AI Business Sutra",
+  title: "Gargi Sutra",
   description: "Light luxury occult business operating system for astrologers, numerologists, Vastu consultants and spiritual practitioners.",
 };
 

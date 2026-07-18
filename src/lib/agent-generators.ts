@@ -234,7 +234,7 @@ Use this order every time:
 7. Builder Prompt: produce a detailed Codex/build prompt for the app, landing page or consultation tool.
 
 ## Copy-Ready Output
-"Gargi AI Business Sutra helps occult professionals turn their wisdom into a clear business path: first the Business Kundli, then niche, persona, offer, Panchang content, scripts and build prompts. The tone stays mature, premium and easy for customers to understand."
+"Gargi Sutra helps occult professionals turn their wisdom into a clear business path: first the Business Kundli, then niche, persona, offer, Panchang content, scripts and build prompts. The tone stays mature, premium and easy for customers to understand."
 
 Content CTA format:
 - Reflection CTA: "If this feels familiar, write CLARITY and I will share what to observe next."
@@ -249,7 +249,7 @@ Hook-script formula:
 5. End with one CTA button or keyword.
 
 Builder prompt:
-"Build a Hindi-first chat-style astro business agent for Gargi AI Business Sutra. The first screen must be a working chat, not a landing page. Ask the user to confirm Hindi or English, then guide them through Business Kundli, niche, persona, premium offer, 7-day Panchang content calendar, viral script, CTA and final build prompt. Output must be structured, mature, non-fear-based and customer-friendly. Store each generated asset and let the user approve or regenerate it."
+"Build a Hindi-first chat-style astro business agent for Gargi Sutra. The first screen must be a working chat, not a landing page. Ask the user to confirm Hindi or English, then guide them through Business Kundli, niche, persona, premium offer, 7-day Panchang content calendar, viral script, CTA and final build prompt. Output must be structured, mature, non-fear-based and customer-friendly. Store each generated asset and let the user approve or regenerate it."
 
 ## Boundaries And Safety
 No guaranteed money, marriage, health, legal or supernatural results. Panchang is used for content inspiration unless verified timing data is provided.

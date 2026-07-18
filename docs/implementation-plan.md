@@ -1,7 +1,7 @@
-# Gargi AI Business Sutra Implementation Plan
+# Gargi Sutra Implementation Plan
 
 ## Phase 1 - Working Core
-- Convert existing Next.js app into Hindi-first Gargi AI Business Sutra.
+- Convert existing Next.js app into Hindi-first Gargi Sutra.
 - Keep local demo persistence through `localStorage`.
 - Add core journey routes: Business Kundli, Niche, Persona, Offer, Calendar, Script, Tools, Build Prompt and Ask Gargi AI.
 - Use server-side `/api/generate` with Gemini/OpenAI provider abstraction and local fallback.

@@ -53,9 +53,9 @@ export function Sidebar() {
     <aside className="app-sidebar fixed left-0 top-0 z-50 hidden h-screen w-72 flex-col border-r border-border-default bg-bg-secondary/92 backdrop-blur-xl lg:flex">
       <div className="border-b border-border-default p-5">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/brand/gargi-ai-universe.jpg" alt="Gargi AI Universe" width={48} height={48} className="h-12 w-12 rounded-full border border-accent-gold/30 object-cover shadow-lg" />
+          <Image src="/brand/gargi-ai-universe.jpg" alt="Gargi Sutra" width={48} height={48} className="h-12 w-12 rounded-full border border-accent-gold/30 object-cover shadow-lg" />
           <div>
-            <h1 className="text-base font-bold tracking-tight text-text-primary">Gargi AI Business Sutra</h1>
+            <h1 className="text-base font-bold tracking-tight text-text-primary">Gargi Sutra</h1>
             <p className="text-[10px] uppercase tracking-[0.2em] text-accent-gold">Light Occult OS</p>
           </div>
         </Link>

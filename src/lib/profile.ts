@@ -112,7 +112,7 @@ export function demoProfile(): BusinessProfile {
   return {
     id: "demo-meera-sharma",
     userId: "local-demo-user",
-    workspaceName: "Gargi AI Business Sutra Demo",
+    workspaceName: "Gargi Sutra Demo",
     practitioner: {
       name: "Meera Sharma",
       businessName: "Meera Vastu Guidance",
@@ -193,7 +193,7 @@ export function emptyProfile(): BusinessProfile {
   return {
     ...demoProfile(),
     id: "local-workspace",
-    workspaceName: "Gargi AI Business Sutra Workspace",
+    workspaceName: "Gargi Sutra Workspace",
     practitioner: {
       name: "",
       businessName: "",
