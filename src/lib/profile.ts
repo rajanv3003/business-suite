@@ -2,6 +2,7 @@ export type AssetStatus = "draft" | "approved" | "archived";
 
 export type WorkspaceArea =
   | "diagnosis"
+  | "problem"
   | "niche"
   | "persona"
   | "offer"
@@ -98,6 +99,7 @@ const now = () => new Date().toISOString();
 
 export const areas: { id: WorkspaceArea; label: string; path: string }[] = [
   { id: "diagnosis", label: "Business Kundli", path: "/business-kundli" },
+  { id: "problem", label: "High Impact Problem", path: "/strategy-room" },
   { id: "niche", label: "Million Dollar Market", path: "/niche-finder" },
   { id: "persona", label: "Customer Type", path: "/customer-persona" },
   { id: "offer", label: "Package & Price", path: "/offer-alchemist" },
@@ -167,6 +169,7 @@ export function demoProfile(): BusinessProfile {
     },
     progress: {
       diagnosis: 80,
+      problem: 0,
       niche: 68,
       persona: 58,
       offer: 35,
@@ -248,6 +251,7 @@ export function emptyProfile(): BusinessProfile {
     },
     progress: {
       diagnosis: 0,
+      problem: 0,
       niche: 0,
       persona: 0,
       offer: 0,

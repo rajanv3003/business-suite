@@ -19,12 +19,14 @@ import {
   Search,
   ScrollText,
   ShieldCheck,
+  Target,
   Users,
   WandSparkles,
 } from "lucide-react";
 
 const iconMap: Record<string, LucideIcon> = {
   diagnosis: ChartNoAxesCombined,
+  problem: Target,
   niche: Search,
   persona: Users,
   offer: BriefcaseBusiness,

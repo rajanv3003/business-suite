@@ -33,12 +33,24 @@ function buildDatedPanchangCalendar(answers: Record<string, string>) {
     .join("\n\n");
 }
 
+function methodLabel(profile: BusinessProfile, answers: Record<string, string>) {
+  return answers.occult_method || profile.practitioner.categories.join(", ") || "astrology, Vastu or numerology";
+}
+
+function buyerLabel(profile: BusinessProfile, answers: Record<string, string>) {
+  return answers.buyer_market || answers.preferred || profile.audience.desiredAudience || profile.audience.currentBuyers || "buyers who need clear spiritual guidance before important decisions";
+}
+
 export function generateAgentAsset(area: WorkspaceArea, profile: BusinessProfile, answers: Record<string, string>): string {
   const name = profile.practitioner.name || "the practitioner";
   const category = profile.practitioner.categories.join(", ") || "occult practitioner";
   const audience = profile.audience.desiredAudience || profile.audience.currentBuyers || "people seeking spiritual clarity";
   const language = profile.preferences.language || "english";
   const context = `Profile used: ${name} works as a ${category}. Audience: ${audience}. Current fee: ${money(profile.business.currentPrice)}. Preferred language: ${language}. Extra input: ${JSON.stringify(answers)}.`;
+  const method = methodLabel(profile, answers);
+  const buyer = buyerLabel(profile, answers);
+  const pain = answers.pain_pattern || profile.audience.urgentProblems || "confusion, delay and repeated wrong decisions";
+  const helpLine = answers.help_line || profile.expertise.problemsSolved || `I help ${buyer} use ${method} to make clearer decisions.`;
 
   const outputs: Record<string, string> = {
     diagnosis: `# Business Kundli Expert
@@ -59,29 +71,131 @@ Do not promise outcomes in money, health, marriage, legal matters or recovery. P
 ## Next Step
 Open Million Dollar Market and choose the one customer market that feels most natural to your real experience.`,
 
+    problem: `# High Impact Problem Expert
+${context}
+
+## 1. New Tangible Transformation Statement
+From ${pain} -> to clearer decisions, stronger self-trust and practical next steps using ${method}.
+
+In simple words:
+"${helpLine} The real value is not only the reading. The value is helping the client stop repeating costly decisions and move with clarity."
+
+## 2. Real-World Domain it Impacts
+This transformation impacts: business decisions, career direction, property choices, family conversations, renovation planning, founder confidence and daily mental peace.
+
+For ${buyer}, the strongest domain is decision-making under pressure. They are not only buying spiritual knowledge. They are buying clarity before a decision that can affect money, time, reputation, relationships or peace of mind.
+
+## 3. List of Measurable Outcomes
+After this work, the client should be able to:
+- Identify the real pattern behind the current problem within 1-2 sessions.
+- Decide the next practical step without asking ten different people.
+- Reduce repeated delay before property, career, business or relationship decisions.
+- Create a 30-day action list based on the reading or consultation.
+- Track what changed in behavior: focus, communication, planning, timing and follow-through.
+
+## 4. Cost of Inaction (Tangible + Emotional)
+If this problem stays unsolved, it can cost the client:
+- ₹2-10L in wrong property, renovation, hiring, career or business decisions, depending on the market.
+- 6-18 months of delay because they keep waiting for certainty.
+- Repeated stress from asking everyone but still not trusting the final decision.
+- Damaged confidence because every wrong step feels like personal failure.
+- Emotional fatigue from living with doubt, fear and confusion every week.
+
+## 5. High Impact Problems List That People Would Pay Premium For
+1. Business owners feel stuck even after working hard and cannot understand the hidden pattern.
+2. Clinic or office owners are unsure if their space supports trust, focus and smooth client flow.
+3. Career professionals cannot decide whether to switch, stay, start something new or ask for growth.
+4. Families delay property, renovation or room decisions because every option feels risky.
+5. Founders keep repeating cash-flow stress, team conflict or wrong timing decisions.
+6. Couples and families face repeated emotional patterns but do not know how to discuss them calmly.
+7. Parents worry about education, direction and confidence but do not want fear-based predictions.
+8. Personal brands struggle with name, date, identity and positioning confusion.
+9. High-responsibility clients make big decisions from fear instead of a clear process.
+10. Spiritual seekers consume too much advice online but still do not know what applies to them.
+
+## 6. Best Premium Problem To Own
+Best problem to own for this profile:
+"Helping ${buyer} make important decisions with clarity by reading the hidden pattern through ${method} and turning it into a practical 30-day action plan."
+
+Why this can become premium:
+- The problem is urgent.
+- The buyer can feel the cost of delay.
+- The solution can be documented.
+- The practitioner can show process, not just prediction.
+- The client receives clear next steps, not only information.
+
+## 7. Simple Offer Direction
+Offer name:
+Decision Clarity Reading
+
+Simple promise:
+"In one focused session, we will identify the pattern behind your current confusion, map the timing or space signals, and create a clear next-step plan you can follow for 30 days."
+
+CTA:
+DM CLARITY if you want help finding the real problem behind your current decision.`,
+
     niche: `# Million Dollar Market Finder
 ${context}
 
-## Core Reading
-Do not choose a market only because it sounds spiritual. Choose a market where people already have a clear problem, already search for guidance and can understand your offer in one line.
+## 1. Primary Promise (P.P.)
+Help ${buyer} move from ${pain} to clearer, calmer and more confident decisions using ${method}, with a practical action plan they can follow for the next 30-90 days.
 
-## Suggested Quest Move
-1. Career and timing clarity for working professionals
-2. Vastu for homes, clinics and offices
-3. Numerology for names, business names and brand identity
-4. Tarot reflection for relationship and emotional clarity
-5. Astrology guidance for founders and creators
+Premium version:
+"I help ${buyer} identify the hidden decision pattern behind their current block and turn it into a clear, practical next-step plan using ${method}."
 
-Recommended first path: Vastu harmony for homes, clinics and offices, because it can be explained visually and turned into clear checklists.
+## 2. Emotionally Compelling (E.C.)
+Primary emotion: frustration turning into confident clarity.
 
-## Copy-Ready Output
-"My work focuses on space, direction and practical harmony. I help clients look at their home, clinic or office through Vastu principles and leave with a clear, respectful action list."
+This buyer is tired of being talented, hardworking or sincere but still feeling stuck. They want someone to help them understand why the same pattern keeps repeating and what to do next without fear, drama or confusing language.
 
-## Boundaries And Safety
-Avoid claiming that Vastu guarantees wealth, patient flow or family peace.
+## 3. Your Unique Mechanism (U.M.) - 5 Indian Market Names
+A. Decision Dosh Map
+- Maps the repeating decision block and shows where the person keeps losing clarity.
 
-## Next Step
-Select one market and create the customer type for it.`,
+B. Lakshmi Flow Check
+- Looks at money, space, timing and behavior patterns before big business or property decisions.
+
+C. Karma Pattern Decoder
+- Turns repeating life or business patterns into simple observations and next steps.
+
+D. Vastu Profit Path
+- For business Vastu: connects office, clinic or home layout observations to client flow, team focus and planning discipline.
+
+E. Kismet Clarity Method
+- Helps clients stop blaming luck and start seeing the specific timing, behavior and decision pattern they can work with.
+
+## 4. Best Buyer Segment
+Recommended first market:
+${buyer}
+
+Why:
+- They already feel urgency.
+- Their decisions have money, time or reputation attached.
+- They can understand the value of a structured reading.
+- They are more likely to pay for clarity when the output is documented.
+
+## 5. High Impact Problem
+The premium problem is:
+"I am making important decisions with doubt, fear or repeated confusion, and it is costing me money, time, confidence and peace."
+
+For this niche, do not sell only ${method}. Sell the resolution of a costly decision pattern.
+
+## 6. Proof Needed
+To make this premium, collect:
+- Before/after clarity notes from clients.
+- Screenshots only with consent.
+- Case examples without private birth details or private floor plans.
+- A simple checklist that shows your process.
+- A written summary format after every consultation.
+
+## 7. Next Action
+Create one offer around the best problem:
+"Decision Clarity Reading for ${buyer}"
+
+Then create three posts:
+1. "3 mistakes ${buyer} make before taking guidance."
+2. "The hidden cost of delaying one important decision."
+3. "Before you blame luck, check this one pattern."`,
 
     persona: `# Customer Type Expert
 ${context}
@@ -226,15 +340,16 @@ Build this as one guided astro business agent, not as separate random tools. The
 ## Suggested Quest Move
 Use this order every time:
 1. Business Kundli: clarify the practitioner's category, experience, strengths, proof and safest positioning.
-2. Million Dollar Market: choose one clear buyer market such as clinic Vastu, founder astrology, numerology branding or Tarot reflection.
-3. Customer Type: define what the customer is worried about, what they want to understand and what language makes them trust the practitioner.
-4. Package & Price: create a named consultation with clear deliverables, session flow, written summary, follow-up and ethical boundaries.
-5. Panchang Content: use Panchang-style inspiration for daily content themes without inventing exact timings.
-6. SM Viral Content: turn one content idea into hook, teaching, reflection, CTA and caption.
-7. App Prompt: produce a detailed Codex/build prompt for the app, landing page or consultation tool.
+2. High Impact Problem: identify the expensive real-life problem, measurable outcome and cost of inaction.
+3. Million Dollar Market: choose one clear buyer market such as clinic Vastu, founder astrology, numerology branding or Tarot reflection.
+4. Customer Type: define what the customer is worried about, what they want to understand and what language makes them trust the practitioner.
+5. Package & Price: create a named consultation with clear deliverables, session flow, written summary, follow-up and ethical boundaries.
+6. Panchang Content: use Panchang-style inspiration for daily content themes without inventing exact timings.
+7. SM Viral Content: turn one content idea into hook, teaching, reflection, CTA and caption.
+8. App Prompt: produce a detailed Codex/build prompt for the app, landing page or consultation tool.
 
 ## Copy-Ready Output
-"Gargi Sutra helps astrologers, numerologists, Vastu consultants and Tarot readers turn their knowledge into a clear business path: Business Kundli, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content and App Prompt."
+"Gargi Sutra helps astrologers, numerologists, Vastu consultants and Tarot readers turn their knowledge into a clear business path: Business Kundli, High Impact Problem, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content and App Prompt."
 
 Content CTA format:
 - Reflection CTA: "If this feels familiar, write CLARITY and I will share what to observe next."
@@ -249,7 +364,7 @@ Hook-script formula:
 5. End with one CTA button or keyword.
 
 Builder prompt:
-"Build a Hindi-first chat-style astro business agent for Gargi Sutra. The first screen must be a working chat, not a landing page. Ask the user to confirm Hindi or English, then guide them through Business Kundli, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content, CTA and final App Prompt. Output must be structured, mature, non-fear-based and customer-friendly. Store each generated asset and let the user approve or regenerate it."
+"Build a Hindi-first chat-style astro business agent for Gargi Sutra. The first screen must be a working chat, not a landing page. Ask the user to confirm Hindi or English, then guide them through Business Kundli, High Impact Problem, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content, CTA and final App Prompt. Output must be structured, mature, non-fear-based and customer-friendly. Store each generated asset and let the user approve or regenerate it."
 
 ## Boundaries And Safety
 No guaranteed money, marriage, health, legal or supernatural results. Panchang is used for content inspiration unless verified timing data is provided.

@@ -20,9 +20,9 @@ import {
 
 const prompts = [
   "Build my full astro business path",
+  "Find my high impact problem",
   "What should I post today using Panchang?",
   "Create my consultation package and price",
-  "Write a Codex build prompt for my astrology app",
 ];
 
 type ChatMessage = {
@@ -65,7 +65,7 @@ export default function Dashboard() {
     {
       role: "guide",
       content:
-        "I can build the complete astro business path for you: Business Kundli, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content and App Prompt. Ask in one line and I will answer in a clear step-by-step way.",
+        "I can build the complete astro business path for you: Business Kundli, High Impact Problem, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content and App Prompt. Ask in one line and I will answer in a clear step-by-step way.",
       meta: "Gargi",
     },
   ]);
@@ -90,7 +90,7 @@ export default function Dashboard() {
           answers: {
             question,
             constraint:
-              "Answer like the Gargi astro business agent. Give a professional, systematic, customer-friendly response in simple words. Include Business Kundli, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content, CTA and App Prompt guidance when relevant.",
+              "Answer like the Gargi astro business agent. Give a professional, systematic, customer-friendly response in simple words. Include Business Kundli, High Impact Problem, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content, CTA and App Prompt guidance when relevant.",
           },
           live: true,
         }),
@@ -113,7 +113,7 @@ export default function Dashboard() {
         {
           role: "guide",
           content:
-            "I could not reach the live agent, but the fallback path is still clear: complete Business Kundli first, then generate Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content and App Prompt in that order.",
+            "I could not reach the live agent, but the fallback path is still clear: complete Business Kundli first, then generate High Impact Problem, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content and App Prompt in that order.",
           meta: "Fallback guidance",
         },
       ]);

@@ -4,6 +4,7 @@ import { getPanchangFestivals, lifeGuidanceForFestival, monthKeyFromInput } from
 
 export const agentNames: Record<WorkspaceArea, string> = {
   diagnosis: "Business Kundli Expert",
+  problem: "High Impact Problem Expert",
   niche: "Million Dollar Market Finder",
   persona: "Customer Type Expert",
   offer: "Package And Price Expert",
@@ -23,6 +24,7 @@ export const agentNames: Record<WorkspaceArea, string> = {
 
 const agentTasks: Record<WorkspaceArea, string> = {
   diagnosis: "Create a clear Business Kundli: what the practitioner does, who they can help, what proof they have and what to do next.",
+  problem: "Research and identify the premium high-impact problem this occult business can solve. Use the niche, buyer market and pain pattern to create a tangible transformation, real-world domain, measurable outcomes, cost of inaction and premium problem list.",
   niche: "Suggest 3-5 clear money markets for astrology, numerology, Vastu, Tarot or healing work. Score buyer need, content clarity, practitioner fit and ethical safety.",
   persona: "Describe the customer type in simple words: worry, desire, buying trigger, trust need and best consultation invitation.",
   offer: "Shape a simple consultation package with steps, deliverables, boundaries, price logic and disclaimer.",
@@ -30,7 +32,7 @@ const agentTasks: Record<WorkspaceArea, string> = {
   script: "Write a polished short-form content script using the hook mastery framework: thumb-stop hook, Panchang/context angle, named micro-method, solution, CTA and caption.",
   tools: "Recommend simple tools for a spiritual practitioner without overwhelming them.",
   prompt: "Create a clean build prompt for a landing page, consultation tool or content system.",
-  guide: "Answer the user's question as Gargi using saved profile context. When the request is broad, build the end-to-end astro business path: Business Kundli, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content, CTA and App Prompt.",
+  guide: "Answer the user's question as Gargi using saved profile context. When the request is broad, build the end-to-end astro business path: Business Kundli, High Impact Problem, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content, CTA and App Prompt.",
   positioning: "Legacy task: create responsible positioning directions.",
   signature: "Legacy task: create a signature method.",
   presentation: "Legacy task: create a consultation presentation.",
@@ -95,11 +97,30 @@ When creating content calendar or social media scripts:
 
 Special behavior for Gargi Business Guide:
 - If the user asks to build an agent, app, business suite, content system or "full solution", respond as an operator, not as a generic chatbot.
-- Cover the full path: Business Kundli -> Million Dollar Market -> Customer Type -> Package & Price -> Panchang Content -> SM Viral Content -> CTA -> App Prompt.
+- Cover the full path: Business Kundli -> High Impact Problem -> Million Dollar Market -> Customer Type -> Package & Price -> Panchang Content -> SM Viral Content -> CTA -> App Prompt.
 - Make the output easy for customers to understand. Use headings, short paragraphs and clear action lines.
 - For content ideas, prefer practical hook formats: "3 mistakes", "1 myth", "before you do X", "stop doing X", "most people miss this".
 - Include Panchang as content inspiration only unless verified Panchang data is supplied. Never invent exact muhurat, tithi timing or city-specific Panchang values.
-- Include a prompt-engineering section only when useful, and make it detailed enough that Codex, Lovable, Replit, Bolt or Cursor can build from it.`;
+- Include a prompt-engineering section only when useful, and make it detailed enough that Codex, Lovable, Replit, Bolt or Cursor can build from it.
+
+Special behavior for High Impact Problem:
+- Act like a premium occult market strategist who understands Indian buyers, not like a generic AI writer.
+- First infer the niche from the user's 3 answers: what they do, who has money/urgency, and what painful pattern exists.
+- Output must use this exact structure:
+  1. New Tangible Transformation Statement
+  2. Real-World Domain it Impacts
+  3. List of Measurable Outcomes
+  4. Cost of Inaction (Tangible + Emotional)
+  5. High Impact Problems List That People Would Pay Premium For
+  6. Best Premium Problem To Own
+  7. Simple Offer Direction
+- Use simple, bold, outcome-focused language. Do not use vague words like "energy shift" unless you connect it to a real behavior, decision, cost, delay, relationship or work result.
+- You may mention potential rupee cost, lost time or missed opportunity, but do not guarantee money, relationship, health or legal outcomes.
+
+Special behavior for Million Dollar Market:
+- Output must include Primary Promise (P.P.), Emotionally Compelling (E.C.), Unique Mechanism (UM), 5 Indian-market mechanism names, best buyer segment, high-impact problem, proof needed and next action.
+- Mechanism names should feel premium and culturally relevant for astrology, numerology, Vastu, Tarot or healing, but must stay responsible and avoid fake scientific proof.
+- Use simple words a practitioner can repeat to a client.`;
 
   const user = `Task:
 ${agentTasks[area]}

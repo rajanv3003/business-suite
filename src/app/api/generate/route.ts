@@ -7,6 +7,7 @@ import { configuredProvider, generateLiveText } from "@/lib/ai-provider";
 const requestSchema = z.object({
   area: z.enum([
     "diagnosis",
+    "problem",
     "niche",
     "persona",
     "offer",

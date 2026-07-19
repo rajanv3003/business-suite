@@ -7,10 +7,11 @@ export default function NicheFinderPage() {
     <AgentWorkspace
       area="niche"
       title="Million Dollar Market"
-      subtitle="Find the customer market where your astrology, numerology, Tarot or Vastu work can sell clearly."
+      subtitle="Find the best niche, the premium buyer, the high-impact problem and a unique mechanism for your occult business."
       questions={[
-        { id: "preferred", label: "Who do you feel called to guide?", placeholder: "Professionals, families, founders, couples, students, homeowners..." },
-        { id: "excluded", label: "What kind of guidance do you not want to offer?", placeholder: "Fear-based predictions, health claims, legal outcomes..." },
+        { id: "help_line", label: "In one line, how can you help people?", placeholder: "I help founders use astrology to make clearer business and career decisions..." },
+        { id: "occult_method", label: "Which method do you use?", placeholder: "Astrology, Vastu, numerology, Tarot, healing, mixed method..." },
+        { id: "buyer_market", label: "Who do you want to help?", placeholder: "Business owners, clinic owners, working professionals, couples, parents, real estate buyers..." },
       ]}
     />
   );

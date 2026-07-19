@@ -2,6 +2,7 @@
 
 Agents are specialized by module:
 - Business Kundli Analyst
+- High Impact Problem Expert
 - Million Dollar Market Finder
 - Customer Type Expert
 - Package And Price Expert

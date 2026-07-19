@@ -146,9 +146,9 @@ export function AgentWorkspace({ area, title, subtitle, questions }: AgentWorksp
 
         <div className="grid gap-4 lg:grid-cols-[0.78fr_1.22fr]">
           <section className="surface premium-panel rounded-xl p-5">
-            <h2 className="text-lg font-bold text-text-primary">Simple Inputs</h2>
+            <h2 className="text-lg font-bold text-text-primary">Answer These Questions</h2>
             <p className="mt-1 text-sm leading-6 text-text-secondary">
-              Add only what matters. The guide uses your saved profile, preferred language and current quest step.
+              Give simple, real answers. Gargi will use your profile, language and this page to write the output.
             </p>
             <div className="mt-5 space-y-4">
               {questions.map((question) => (
@@ -259,7 +259,7 @@ export function AgentWorkspace({ area, title, subtitle, questions }: AgentWorksp
                 <div>
                   <Sparkles className="mx-auto text-text-secondary" size={32} />
                   <p className="mt-3 text-sm font-semibold text-text-primary">No output yet</p>
-                  <p className="mt-1 text-sm text-text-secondary">Answer the simple inputs and create your scroll.</p>
+                  <p className="mt-1 text-sm text-text-secondary">Answer the questions and create your output.</p>
                 </div>
               </div>
             )}

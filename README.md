@@ -2,7 +2,7 @@
 
 Hindi-first AI business operating system for astrologers, numerologists, Vastu consultants and occult professionals. The app focuses on the core path:
 
-Business Kundli -> Million Dollar Market -> Customer Type -> Package & Price -> Panchang Content -> SM Viral Content.
+Business Kundli -> High Impact Problem -> Million Dollar Market -> Customer Type -> Package & Price -> Panchang Content -> SM Viral Content.
 
 ## What Works
 
@@ -11,7 +11,7 @@ Business Kundli -> Million Dollar Market -> Customer Type -> Package & Price -> 
 - Server-side Gemini/OpenAI generation with deterministic fallback.
 - Editable generated assets with draft and approve workflow.
 - Demo profile for Meera Sharma, a Vastu consultant.
-- Core module routes for Business Kundli, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content, AI Tools, App Prompt and Talk to Gargi.
+- Core module routes for Business Kundli, High Impact Problem, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content, AI Tools, App Prompt and Talk to Gargi.
 - Documentation for architecture, AI agents, Panchang provider, admin, deployment and privacy.
 
 ## Local Setup
