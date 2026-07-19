@@ -29,7 +29,7 @@ function StructuredOutput({ content }: { content: string }) {
       {sections.map((section, index) => (
         <article key={`${section.title}-${index}`} className="answer-card">
           <p className="text-xs font-black uppercase tracking-[0.18em] text-text-secondary">
-            {index === 0 ? "Gargi Reading" : section.title}
+            {index === 0 ? "Gargi Answer" : section.title}
           </p>
           {index === 0 ? <h3 className="mt-1 text-xl font-black text-text-primary">{section.title}</h3> : null}
           <div className="mt-2 whitespace-pre-wrap text-sm leading-7 text-text-secondary">{section.body}</div>
@@ -91,7 +91,7 @@ export function AgentWorkspace({ area, title, subtitle, questions }: AgentWorksp
       <div className="mx-auto max-w-6xl">
         <Link href="/" className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-accent-gold">
           <ArrowLeft size={16} />
-          Back to Quest Home
+          Back to Home
         </Link>
 
         <div className="agent-header mb-6 rounded-xl p-5 lg:p-6">
@@ -130,7 +130,7 @@ export function AgentWorkspace({ area, title, subtitle, questions }: AgentWorksp
           </div>
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
             <div className="metric-card rounded-lg p-4">
-              <p className="text-xs text-text-secondary">Quest progress</p>
+              <p className="text-xs text-text-secondary">Progress</p>
               <p className="mt-1 text-2xl font-black text-accent-gold">{profile.progress[area]}%</p>
             </div>
             <div className="metric-card rounded-lg p-4">

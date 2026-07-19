@@ -3,7 +3,7 @@
 ## Phase 1 - Working Core
 - Convert existing Next.js app into Hindi-first Gargi Sutra.
 - Keep local demo persistence through `localStorage`.
-- Add core journey routes: Business Kundli, Niche, Persona, Offer, Calendar, Script, Tools, Build Prompt and Ask Gargi AI.
+- Add core journey routes: Business Kundli, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content, AI Tools, App Prompt and Talk to Gargi.
 - Use server-side `/api/generate` with Gemini/OpenAI provider abstraction and local fallback.
 
 ## Phase 2 - Production Foundation

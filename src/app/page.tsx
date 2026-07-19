@@ -21,7 +21,7 @@ import {
 const prompts = [
   "Build my full astro business path",
   "What should I post today using Panchang?",
-  "Create a calm premium offer for my consultations",
+  "Create my consultation package and price",
   "Write a Codex build prompt for my astrology app",
 ];
 
@@ -33,23 +33,23 @@ type ChatMessage = {
 
 const copy = {
   english: {
-    greeting: "Hi, I’m Gargi Guide.",
+    greeting: "Hi, I’m Gargi.",
     intro: "Tell me what you want to improve today. I’ll respond like a thoughtful guide, not like a copy-paste bot.",
-    placeholder: "Ask Gargi about content, offers, astrology positioning...",
+    placeholder: "Ask Gargi about content, market, package, Panchang or app prompt...",
     typing: "Gargi is typing",
     feedback: "What should I improve in this answer?",
     quick: "Quick questions",
-    quest: "Your Quest Path",
+    quest: "Your Work Steps",
     partners: "Highlighted ecosystem logos",
   },
   hindi: {
-    greeting: "Hi, I’m Gargi Guide.",
+    greeting: "Hi, I’m Gargi.",
     intro: "आज क्या improve करना है बताइए. मैं copy-paste bot की तरह नहीं, एक thoughtful guide की तरह जवाब दूंगी.",
-    placeholder: "Content, offers या astrology positioning के बारे में पूछें...",
+    placeholder: "Content, market, package, Panchang या app prompt के बारे में पूछें...",
     typing: "Gargi is typing",
     feedback: "इस answer में क्या improve करूं?",
     quick: "Quick questions",
-    quest: "Your Quest Path",
+    quest: "Your Work Steps",
     partners: "Highlighted ecosystem logos",
   },
 };
@@ -65,8 +65,8 @@ export default function Dashboard() {
     {
       role: "guide",
       content:
-        "I can build the complete astro business agent path for you: Business Kundli, niche, customer persona, premium offer, Panchang content calendar, viral script and build prompt. Ask in one line and I will answer in a structured way.",
-      meta: "Gargi Business Guide",
+        "I can build the complete astro business path for you: Business Kundli, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content and App Prompt. Ask in one line and I will answer in a clear step-by-step way.",
+      meta: "Gargi",
     },
   ]);
   const [chatError, setChatError] = useState("");
@@ -90,7 +90,7 @@ export default function Dashboard() {
           answers: {
             question,
             constraint:
-              "Answer like the Gargi astro business agent. Give a professional, systematic, customer-friendly response. Include Business Kundli, niche, persona, offer, Panchang content, CTA/script and build prompt guidance when relevant.",
+              "Answer like the Gargi astro business agent. Give a professional, systematic, customer-friendly response in simple words. Include Business Kundli, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content, CTA and App Prompt guidance when relevant.",
           },
           live: true,
         }),
@@ -113,7 +113,7 @@ export default function Dashboard() {
         {
           role: "guide",
           content:
-            "I could not reach the live agent, but the fallback path is still clear: complete Business Kundli first, then generate Niche, Persona, Offer, 7-Day Panchang Calendar, Script Studio and Builder Scroll in that order.",
+            "I could not reach the live agent, but the fallback path is still clear: complete Business Kundli first, then generate Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content and App Prompt in that order.",
           meta: "Fallback guidance",
         },
       ]);
@@ -140,7 +140,7 @@ export default function Dashboard() {
       <div className="grid gap-3">
         {sections.map((section, index) => (
           <article key={`${section.title}-${index}`} className="answer-card">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-text-secondary">{index === 0 ? "Gargi Guide" : section.title}</p>
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-text-secondary">{index === 0 ? "Gargi Answer" : section.title}</p>
             {index === 0 ? <h3 className="mt-1 text-lg font-black text-text-primary">{section.title}</h3> : null}
             <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-text-secondary">{section.body}</p>
           </article>
@@ -304,12 +304,12 @@ export default function Dashboard() {
           </section>
 
           <section className="surface premium-panel rounded-xl p-5">
-            <h2 className="text-lg font-black text-text-primary">Quick Moves</h2>
+            <h2 className="text-lg font-black text-text-primary">Quick Actions</h2>
             <div className="mt-4 space-y-2">
               {[
-                ["/offer-alchemist", "Craft an Offering", WandSparkles],
-                ["/content-calendar", "Open Cosmic Calendar", CalendarDays],
-                ["/script-studio", "Write Content", MessageCircle],
+                ["/offer-alchemist", "Make Package", WandSparkles],
+                ["/content-calendar", "Panchang Ideas", CalendarDays],
+                ["/script-studio", "Write SM Content", MessageCircle],
               ].map(([href, label, Icon]) => {
                 const TypedIcon = Icon as typeof Sparkles;
                 return (

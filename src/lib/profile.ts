@@ -97,15 +97,15 @@ const STORAGE_KEY = "astro-business-os-profile";
 const now = () => new Date().toISOString();
 
 export const areas: { id: WorkspaceArea; label: string; path: string }[] = [
-  { id: "diagnosis", label: "Soul Map", path: "/business-kundli" },
-  { id: "niche", label: "Path Finder", path: "/niche-finder" },
-  { id: "persona", label: "Client Avatar", path: "/customer-persona" },
-  { id: "offer", label: "Offering Craft", path: "/offer-alchemist" },
-  { id: "calendar", label: "Cosmic Calendar", path: "/content-calendar" },
-  { id: "script", label: "Content Spellbook", path: "/script-studio" },
-  { id: "tools", label: "Tool Oracle", path: "/ai-tool-advisor" },
-  { id: "prompt", label: "Builder Scroll", path: "/build-prompt-generator" },
-  { id: "guide", label: "Gargi Guide", path: "/ask-gargi-ai" },
+  { id: "diagnosis", label: "Business Kundli", path: "/business-kundli" },
+  { id: "niche", label: "Million Dollar Market", path: "/niche-finder" },
+  { id: "persona", label: "Customer Type", path: "/customer-persona" },
+  { id: "offer", label: "Package & Price", path: "/offer-alchemist" },
+  { id: "calendar", label: "Panchang Content", path: "/content-calendar" },
+  { id: "script", label: "SM Viral Content", path: "/script-studio" },
+  { id: "tools", label: "AI Tools", path: "/ai-tool-advisor" },
+  { id: "prompt", label: "App Prompt", path: "/build-prompt-generator" },
+  { id: "guide", label: "Talk to Gargi", path: "/ask-gargi-ai" },
 ];
 
 export function demoProfile(): BusinessProfile {

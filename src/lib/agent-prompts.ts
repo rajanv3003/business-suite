@@ -3,15 +3,15 @@ import { hookFrameworkBlock } from "./hook-framework";
 import { getPanchangFestivals, lifeGuidanceForFestival, monthKeyFromInput } from "./panchang-festivals";
 
 export const agentNames: Record<WorkspaceArea, string> = {
-  diagnosis: "Soul Map Guide",
-  niche: "Practice Path Finder",
-  persona: "Client Avatar Reader",
-  offer: "Offering Craft Guide",
-  calendar: "Cosmic Calendar Keeper",
-  script: "Content Spellbook Writer",
-  tools: "Tool Oracle",
-  prompt: "Builder Scroll Scribe",
-  guide: "Gargi Guide",
+  diagnosis: "Business Kundli Expert",
+  niche: "Million Dollar Market Finder",
+  persona: "Customer Type Expert",
+  offer: "Package And Price Expert",
+  calendar: "Panchang Content Planner",
+  script: "SM Viral Content Writer",
+  tools: "AI Tools Guide",
+  prompt: "App Prompt Writer",
+  guide: "Talk to Gargi",
   positioning: "Legacy Positioning Guide",
   signature: "Legacy Method Guide",
   presentation: "Legacy Presentation Guide",
@@ -22,15 +22,15 @@ export const agentNames: Record<WorkspaceArea, string> = {
 };
 
 const agentTasks: Record<WorkspaceArea, string> = {
-  diagnosis: "Create a clear Soul Map: practice identity, strongest guidance themes, audience fit, proof gaps and next quest move.",
-  niche: "Suggest 3-5 focused occult practice paths without pushy sales language. Score clarity, audience need, practitioner fit and ethical safety.",
-  persona: "Describe a respectful client avatar: inner questions, trust needs, anxieties, desired clarity and best consultation invitation.",
-  offer: "Shape a gentle, premium-feeling service offering with ritual flow, deliverables, boundaries, pricing logic and disclaimer.",
+  diagnosis: "Create a clear Business Kundli: what the practitioner does, who they can help, what proof they have and what to do next.",
+  niche: "Suggest 3-5 clear money markets for astrology, numerology, Vastu, Tarot or healing work. Score buyer need, content clarity, practitioner fit and ethical safety.",
+  persona: "Describe the customer type in simple words: worry, desire, buying trigger, trust need and best consultation invitation.",
+  offer: "Shape a simple consultation package with steps, deliverables, boundaries, price logic and disclaimer.",
   calendar: "Create a 7-day cosmic content ritual using Panchang-style inspiration and viral hook fundamentals. Each day must include hook, Panchang angle, solution, CTA and caption.",
   script: "Write a polished short-form content script using the hook mastery framework: thumb-stop hook, Panchang/context angle, named micro-method, solution, CTA and caption.",
   tools: "Recommend simple tools for a spiritual practitioner without overwhelming them.",
   prompt: "Create a clean build prompt for a landing page, consultation tool or content system.",
-  guide: "Answer the user's question as Gargi Business Guide using saved profile context. When the request is broad, build the end-to-end astro business path: Business Kundli, niche, customer persona, premium offer, Panchang content calendar, viral script, CTA and build prompt.",
+  guide: "Answer the user's question as Gargi using saved profile context. When the request is broad, build the end-to-end astro business path: Business Kundli, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content, CTA and App Prompt.",
   positioning: "Legacy task: create responsible positioning directions.",
   signature: "Legacy task: create a signature method.",
   presentation: "Legacy task: create a consultation presentation.",
@@ -44,7 +44,7 @@ export function buildAgentPrompt(area: WorkspaceArea, profile: BusinessProfile, 
   const language = profile.preferences?.language === "hindi" ? "Hindi in Devanagari with simple English terms where useful" : "polished, natural English";
   const panchangMonth = monthKeyFromInput(answers.month || answers.content_month || answers.city);
   const panchangEvents = getPanchangFestivals(panchangMonth);
-  const system = `You are Gargi Guide inside Gargi Sutra, a light-luxury business game for astrologers, numerologists, Vastu consultants, Tarot readers, healers and occult professionals.
+  const system = `You are Gargi inside Gargi Sutra, a light-luxury business game for astrologers, numerologists, Vastu consultants, Tarot readers, healers and occult professionals.
 
 You are operating as: ${agentNames[area]}.
 
@@ -95,7 +95,7 @@ When creating content calendar or social media scripts:
 
 Special behavior for Gargi Business Guide:
 - If the user asks to build an agent, app, business suite, content system or "full solution", respond as an operator, not as a generic chatbot.
-- Cover the full path: Business Kundli -> Niche -> Persona -> Offer -> 7-Day Panchang Calendar -> Viral Script -> CTA -> Build Prompt.
+- Cover the full path: Business Kundli -> Million Dollar Market -> Customer Type -> Package & Price -> Panchang Content -> SM Viral Content -> CTA -> App Prompt.
 - Make the output easy for customers to understand. Use headings, short paragraphs and clear action lines.
 - For content ideas, prefer practical hook formats: "3 mistakes", "1 myth", "before you do X", "stop doing X", "most people miss this".
 - Include Panchang as content inspiration only unless verified Panchang data is supplied. Never invent exact muhurat, tithi timing or city-specific Panchang values.

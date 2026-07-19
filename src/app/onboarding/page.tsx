@@ -19,7 +19,7 @@ const questions = [
   { path: "audience.desiredAudience", label: "Who do you feel called to guide?", placeholder: "Professionals, families, founders, students, homeowners..." },
   { path: "audience.objections", label: "What makes people hesitate before a session?", placeholder: "Fear of judgment, price, unclear process, too many claims..." },
   { path: "proof.testimonials", label: "What real proof can be safely mentioned?", placeholder: "Experience, consented testimonials, anonymized reflections..." },
-  { path: "preferences.businessModels", label: "What kind of offering feels right?", placeholder: "Reading, consultation, monthly guidance, content ritual..." },
+  { path: "preferences.businessModels", label: "What kind of package feels right?", placeholder: "Reading, consultation, monthly guidance, content plan..." },
 ];
 
 function getValue(source: Record<string, unknown>, path: string) {
@@ -75,15 +75,15 @@ export default function OnboardingPage() {
       <div className="mx-auto max-w-3xl">
         <Link href="/" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-accent-gold">
           <ArrowLeft size={16} />
-          Back to Quest Home
+          Back to Home
         </Link>
         <div className="surface rounded-xl p-6 lg:p-8">
           <div className="mb-8 flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-accent-gold">Profile Ritual</p>
-              <h1 className="mt-2 text-3xl font-black text-text-primary">Build your Soul Map</h1>
+              <p className="text-xs uppercase tracking-[0.2em] text-accent-gold">Business Profile</p>
+              <h1 className="mt-2 text-3xl font-black text-text-primary">Build your Business Kundli</h1>
               <p className="mt-2 text-sm leading-6 text-text-secondary">
-                This becomes the source for your practice path, client avatar, offerings, calendar and Gargi Guide.
+                This becomes the source for your market, customer type, package, Panchang content and Talk to Gargi answers.
               </p>
             </div>
             <div className="grid h-14 w-14 place-items-center rounded-xl bg-accent-gold/10 text-accent-gold">
@@ -123,7 +123,7 @@ export default function OnboardingPage() {
             </button>
             <button onClick={next} disabled={!answer.trim()} className="primary-button inline-flex items-center gap-2 px-5 py-3">
               {step === questions.length - 1 ? <Check size={18} /> : <ArrowRight size={18} />}
-              {step === questions.length - 1 ? "Create Soul Map" : "Next"}
+              {step === questions.length - 1 ? "Create Business Kundli" : "Next"}
             </button>
           </div>
         </div>

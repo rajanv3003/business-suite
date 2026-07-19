@@ -6,8 +6,8 @@ export default function ScriptStudioPage() {
   return (
     <AgentWorkspace
       area="script"
-      title="Content Spellbook"
-      subtitle="Create hook-led Reels, Shorts, carousels or WhatsApp scripts with Panchang context, solution and CTA."
+      title="SM Viral Content"
+      subtitle="Create social media hooks, Reels, Shorts, carousel ideas and WhatsApp scripts that normal people understand."
       questions={[
         { id: "topic", label: "What is today’s topic?", placeholder: "Before you ask for a prediction, ask this..." },
         { id: "tone", label: "What tone should it have?", placeholder: "Calm, reflective, elegant, practical, beginner-friendly..." },

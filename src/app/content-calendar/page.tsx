@@ -6,8 +6,8 @@ export default function ContentCalendarPage() {
   return (
     <AgentWorkspace
       area="calendar"
-      title="Cosmic Calendar"
-      subtitle="Turn Panchang-style inspiration into hook-led content with a clear solution, caption and CTA. Exact timings must be verified."
+      title="Panchang Content"
+      subtitle="Use Panchang dates to create useful content ideas with hook, reason, solution and CTA."
       questions={[
         { id: "month", label: "Which month should Gargi plan?", placeholder: "June 2026, July 2026, August 2026..." },
         { id: "city", label: "Which city should the calendar respect?", placeholder: "Mumbai, Maharashtra, India, Asia/Kolkata" },

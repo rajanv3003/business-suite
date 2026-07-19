@@ -2,13 +2,13 @@
 
 Agents are specialized by module:
 - Business Kundli Analyst
-- High-Ticket Niche Finder
-- Customer Persona Builder
-- Premium Offer Alchemist
+- Million Dollar Market Finder
+- Customer Type Expert
+- Package And Price Expert
 - Panchang Content Strategist
-- Viral Script Writer
+- SM Viral Content Writer
 - AI Tool Advisor
-- AI Build Prompt Engineer
+- App Prompt Writer
 - Gargi Business Guide
 
 All agents share guardrails: no fabricated proof, no fear-based claims, no guaranteed outcomes, and Hindi-first output.

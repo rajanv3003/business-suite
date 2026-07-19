@@ -36,9 +36,9 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const navItems = [
-  { href: "/", label: "Quest Home", icon: LayoutDashboard },
-  { href: "/onboarding", label: "Profile Ritual", icon: BrainCircuit },
-  { href: "/business-brain", label: "Saved Scrolls", icon: FileText },
+  { href: "/", label: "Home", icon: LayoutDashboard },
+  { href: "/onboarding", label: "Business Profile", icon: BrainCircuit },
+  { href: "/business-brain", label: "Saved Work", icon: FileText },
   ...areas.map((area) => ({ href: area.path, label: area.label, icon: iconMap[area.id], area: area.id })),
   { href: "/admin", label: "Admin", icon: ShieldCheck },
 ];
@@ -70,7 +70,7 @@ export function Sidebar() {
           <div className="h-full rounded-full bg-gold-gradient transition-all" style={{ width: `${total}%` }} />
         </div>
         <div className="mt-2 flex items-center justify-between text-[11px] text-text-secondary">
-          <span>Quest progress</span>
+          <span>Progress</span>
           <span className="font-semibold text-accent-gold">{total}%</span>
         </div>
       </div>
