@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import { useProfile } from "@/context/ProfileContext";
 import { areas, completion } from "@/lib/profile";
+import type { WorkspaceArea } from "@/lib/profile";
 import {
   ArrowRight,
   CalendarDays,
@@ -18,11 +19,55 @@ import {
   WandSparkles,
 } from "lucide-react";
 
-const prompts = [
-  "Build my full astro business path",
-  "Find my high impact problem",
-  "What should I post today using Panchang?",
-  "Create my consultation package and price",
+const topics: { label: string; description: string; area: WorkspaceArea; prompt: string }[] = [
+  {
+    label: "Full Business Path",
+    description: "Business Kundli to app prompt",
+    area: "guide",
+    prompt: "Build my full astro business path step by step.",
+  },
+  {
+    label: "High Impact Problem",
+    description: "Find the premium problem",
+    area: "problem",
+    prompt: "Find my high impact problem for my occult business.",
+  },
+  {
+    label: "Million Dollar Market",
+    description: "Niche and mechanism",
+    area: "niche",
+    prompt: "Find my million dollar market and unique mechanism.",
+  },
+  {
+    label: "Customer",
+    description: "Who will buy and why",
+    area: "persona",
+    prompt: "Help me understand my best customer type.",
+  },
+  {
+    label: "Package & Price",
+    description: "Offer, value and CTA",
+    area: "offer",
+    prompt: "Create my consultation package and price direction.",
+  },
+  {
+    label: "SM Viral Content",
+    description: "Hook, script, CTA",
+    area: "script",
+    prompt: "Write social media viral content for my occult business.",
+  },
+  {
+    label: "Panchang Content",
+    description: "Date-based content idea",
+    area: "calendar",
+    prompt: "What should I post using Panchang this month?",
+  },
+  {
+    label: "App Prompt",
+    description: "Prompt for Codex or Lovable",
+    area: "prompt",
+    prompt: "Write an app build prompt for my astrology business.",
+  },
 ];
 
 type ChatMessage = {
@@ -34,21 +79,21 @@ type ChatMessage = {
 const copy = {
   english: {
     greeting: "Hi, I’m Gargi.",
-    intro: "Tell me what you want to improve today. I’ll respond like a thoughtful guide, not like a copy-paste bot.",
+    intro: "First choose what you want to work on today. Then tell me your situation in simple words, and I’ll answer like Gargi directly.",
     placeholder: "Ask Gargi about content, market, package, Panchang or app prompt...",
     typing: "Gargi is typing",
     feedback: "What should I improve in this answer?",
-    quick: "Quick questions",
+    quick: "Choose topic",
     quest: "Your Work Steps",
     partners: "Highlighted ecosystem logos",
   },
   hindi: {
     greeting: "Hi, I’m Gargi.",
-    intro: "आज क्या improve करना है बताइए. मैं copy-paste bot की तरह नहीं, एक thoughtful guide की तरह जवाब दूंगी.",
+    intro: "पहले चुनिए आज किस चीज पर काम करना है. फिर अपनी situation simple words में बताइए, मैं Gargi की तरह सीधा जवाब दूंगी.",
     placeholder: "Content, market, package, Panchang या app prompt के बारे में पूछें...",
     typing: "Gargi is typing",
     feedback: "इस answer में क्या improve करूं?",
-    quick: "Quick questions",
+    quick: "Topic चुनिए",
     quest: "Your Work Steps",
     partners: "Highlighted ecosystem logos",
   },
@@ -65,7 +110,7 @@ export default function Dashboard() {
     {
       role: "guide",
       content:
-        "I can build the complete astro business path for you: Business Kundli, High Impact Problem, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content and App Prompt. Ask in one line and I will answer in a clear step-by-step way.",
+        "First tell me what you want to talk about today: customer, content, market, high impact problem, package, Panchang idea, app prompt or the full business path. I will ask and answer in a clear step-by-step way.",
       meta: "Gargi",
     },
   ]);
@@ -73,9 +118,24 @@ export default function Dashboard() {
 
   const nextArea = useMemo(() => areas.find((area) => profile.progress[area.id] < 70) || areas[1], [profile.progress]);
 
-  const ask = async (text: string) => {
+  const inferArea = (text: string): WorkspaceArea => {
+    const lower = text.toLowerCase();
+    if (/impact|problem|pain|cost|inaction/.test(lower)) return "problem";
+    if (/market|niche|mechanism|million/.test(lower)) return "niche";
+    if (/customer|client|audience|buyer/.test(lower)) return "persona";
+    if (/package|price|offer|consultation/.test(lower)) return "offer";
+    if (/panchang|calendar|date|festival|month/.test(lower)) return "calendar";
+    if (/content|viral|hook|script|reel|short|post|social/.test(lower)) return "script";
+    if (/app|prompt|codex|lovable|replit|bolt|cursor/.test(lower)) return "prompt";
+    if (/tool|automation|software/.test(lower)) return "tools";
+    if (/kundli|profile|business path|full/.test(lower)) return "guide";
+    return "guide";
+  };
+
+  const ask = async (text: string, forcedArea?: WorkspaceArea) => {
     const question = text.trim();
     if (!question || isTyping) return;
+    const selectedArea = forcedArea || inferArea(question);
     setMessages((current) => [...current, { role: "user", content: question }]);
     setInput("");
     setChatError("");
@@ -85,12 +145,16 @@ export default function Dashboard() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          area: "guide",
+          area: selectedArea,
           profile,
           answers: {
             question,
+            help_line: question,
+            buyer_market: profile.audience.desiredAudience || profile.audience.currentBuyers,
+            pain_pattern: profile.audience.urgentProblems,
+            topic: selectedArea,
             constraint:
-              "Answer like the Gargi astro business agent. Give a professional, systematic, customer-friendly response in simple words. Include Business Kundli, High Impact Problem, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content, CTA and App Prompt guidance when relevant.",
+              "Start like a real conversation. If more detail is needed, still give a useful first answer and then ask one follow-up question. Use simple words, premium formatting, clear solution, and next action. Route the answer to the selected Gargi Sutra module.",
           },
           live: true,
         }),
@@ -113,7 +177,7 @@ export default function Dashboard() {
         {
           role: "guide",
           content:
-            "I could not reach the live agent, but the fallback path is still clear: complete Business Kundli first, then generate High Impact Problem, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content and App Prompt in that order.",
+            "I could not reach the live agent, but Gargi can still guide you. Choose one topic: High Impact Problem, Million Dollar Market, Customer Type, Package & Price, Panchang Content, SM Viral Content or App Prompt.",
           meta: "Fallback guidance",
         },
       ]);
@@ -185,6 +249,19 @@ export default function Dashboard() {
               </div>
             </div>
 
+            <div className="grid gap-3 pl-0 sm:grid-cols-2 lg:grid-cols-4 lg:pl-14">
+              {topics.map((topic) => (
+                <button
+                  key={topic.label}
+                  onClick={() => ask(topic.prompt, topic.area)}
+                  className="rounded-lg border border-border-default bg-white/78 p-3 text-left shadow-sm transition hover:border-accent-gold/40 hover:bg-accent-gold/8"
+                >
+                  <span className="block text-sm font-black text-text-primary">{topic.label}</span>
+                  <span className="mt-1 block text-xs leading-5 text-text-secondary">{topic.description}</span>
+                </button>
+              ))}
+            </div>
+
             {messages.map((message, index) =>
               message.role === "user" ? (
                 <div key={`${message.role}-${index}`} className="chat-row user-row">
@@ -247,9 +324,9 @@ export default function Dashboard() {
             </div>
             <div className="mt-3 flex flex-wrap gap-2">
               <span className="py-2 text-xs font-bold uppercase tracking-[0.16em] text-text-secondary">{t.quick}</span>
-              {prompts.map((prompt) => (
-                <button key={prompt} onClick={() => ask(prompt)} className="secondary-button px-3 py-2 text-xs">
-                  {prompt}
+              {topics.slice(0, 6).map((topic) => (
+                <button key={topic.label} onClick={() => ask(topic.prompt, topic.area)} className="secondary-button px-3 py-2 text-xs">
+                  {topic.label}
                 </button>
               ))}
             </div>
